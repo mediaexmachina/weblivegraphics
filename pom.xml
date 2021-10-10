@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.mediaexmachina</groupId>
+	<artifactId>weblivegraphics</artifactId>
+	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>WebLiveGraphics</name>
+	<url>https://github.com/mediaexmachina/weblivegraphics</url>
+	<description>Display live informations and events on your live stream via web pages</description>
+
+	<parent>
+		<groupId>tv.hd3g.commons</groupId>
+		<artifactId>parent-web</artifactId>
+		<version>4.0.0</version>
+		<relativePath />
+	</parent>
+
+	<!-- dependencies>
+		<dependency>
+		</dependency>
+	</dependencies-->
+
+	<scm>
+		<connection>scm:git:https://github.com/mediaexmachina/weblivegraphics.git</connection>
+		<developerConnection>scm:git:https://github.com/mediaexmachina/weblivegraphics.git</developerConnection>
+		<url>https://github.com/mediaexmachina/weblivegraphics</url>
+		<tag>HEAD</tag>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/mediaexmachina/weblivegraphics/issues</url>
+		<system>GitHub</system>
+	</issueManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

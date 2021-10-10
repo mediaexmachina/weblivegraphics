@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "weblivegraphics",
+  "type": "media.mexm.weblivegraphics.Config",
+  "description": "Main App configuration"
+}]}

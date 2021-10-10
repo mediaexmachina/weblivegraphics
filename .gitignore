@@ -1,0 +1,40 @@
+# Spring conf
+config/application.yml
+config/log4j2.xml
+
+# Windows / macOS
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# Maven
+target/
+!**/src/main/**
+!**/src/test/**
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# VS Code
+.vscode/
+*.code-workspace
