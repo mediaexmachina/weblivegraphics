@@ -28,8 +28,8 @@ jobs:
         -Dgpg.skip=true
         -Dmaven.javadoc.skip=true
         -Dmaven.source.skip=true
-        -Dsonar.projectKey=hdsdi3g_weblivegraphics
-        -Dsonar.organization=hdsdi3g
+        -Dsonar.projectKey=mediaexmachina_weblivegraphics
+        -Dsonar.organization=mediaexmachina
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.sources="src/main/java,src/main/resources"
         -Dsonar.login=$SONAR_TOKEN
