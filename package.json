@@ -1,0 +1,38 @@
+{
+    "name": "weblivegraphic-front",
+    "version": "0.0.1",
+    "description": "Media ex Machina's Weblivegraphic front app",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:mediaexmachina/weblivegraphics.git"
+    },
+    "keywords": [],
+    "author": "hdsdi3g / Media ex Machina",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/mediaexmachina/weblivegraphics/issues"
+    },
+    "homepage": "https://github.com/mediaexmachina/weblivegraphics",
+    "dependencies": {
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
+    },
+    "scripts": {
+        "watch": "node_modules/.bin/webpack --watch",
+        "install": "node_modules/.bin/webpack --config webpack.config.prod.js"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.16.0",
+        "@babel/preset-env": "^7.16.4",
+        "@babel/preset-react": "^7.16.0",
+        "babel-loader": "^8.2.3",
+        "compression-webpack-plugin": "^7.1.2",
+        "css-loader": "^6.5.1",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^5.5.0",
+        "license-checker-webpack-plugin": "^0.2.1",
+        "style-loader": "^3.3.1",
+        "webpack": "^5.64.1",
+        "webpack-cli": "^4.9.1"
+    }
+}

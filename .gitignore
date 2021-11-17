@@ -12,6 +12,19 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+# Node / Javascript
+.lock-wscript
+.wafpickle-N
+.*.swp
+._*
+npm-debug.log
+#.npmrc
+node_modules
+#config.gypi
+*.orig
+package-lock.json
+src/main/resources/static/bundle-prod.js
+
 # STS
 .apt_generated
 .classpath

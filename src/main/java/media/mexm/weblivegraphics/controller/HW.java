@@ -16,6 +16,7 @@
  */
 package media.mexm.weblivegraphics.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HW {
 
+	@Value("${js.devmode:false}")
+	private boolean devmode;
+
 	@GetMapping("/")
 	public String index(final Model model) {
+		model.addAttribute("devmode", devmode);
 		return "index";
 	}
 

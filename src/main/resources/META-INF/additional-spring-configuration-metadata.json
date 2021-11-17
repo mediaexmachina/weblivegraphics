@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "weblivegraphics",
-  "type": "media.mexm.weblivegraphics.Config",
-  "description": "Main App configuration"
-}]}
+{"properties": [
+  {
+    "name": "weblivegraphics",
+    "type": "media.mexm.weblivegraphics.Config",
+    "description": "Main App configuration"
+  },
+  {
+    "name": "js.devmode",
+    "type": "java.lang.Boolean",
+    "description": "Choose if front page load bundle.js (dev mode) or bundle-prod.js (prod mode). No checks will be made."
+  }
+]}

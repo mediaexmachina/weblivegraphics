@@ -1,4 +1,4 @@
-<!--/*
+/*
  * This file is part of weblivegraphics.
  *
  * weblivegraphics is free software; you can redistribute it and/or modify
@@ -13,22 +13,26 @@
  *
  * Copyright (C) Media ex Machina 2021
  *
-*/-->
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ */
+'use strict';
 
-<head>
-    <meta charset="UTF-8" />
-    <title>WebLiveGraphics</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/font-source-sans-pro/font.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-</head>
+import { Component } from 'react';
+import { render as _render } from 'react-dom';
 
-<body>
-    Hello world weblivegraphics
-    <div id="react"></div>
-    <script th:if="${devmode}" src="bundle.js"></script>
-    <script th:unless="${devmode}" src="bundle-prod.js"></script>
-</body>
+class App extends Component {
 
-</html>
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<h1>Hello World from React 2</h1>
+		)
+	}
+}
+
+_render(
+	<App />,
+	document.getElementById('react')
+)
