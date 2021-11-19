@@ -18,6 +18,10 @@
 		<relativePath />
 	</parent>
 
+	<properties>
+		<sonar.sources>src/main/js</sonar.sources>
+	</properties>
+
 	<!-- dependencies>
 		<dependency>
 		</dependency>

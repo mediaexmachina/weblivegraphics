@@ -11,22 +11,19 @@ on:
 
 jobs:
   sonarcloud:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Remove pom file
+      run: rm -f pom.xml
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
         args: >
-          -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.organization=mediaexmachina
           -Dsonar.projectKey=mediaexmachina_weblivegraphics
-          -Dsonar.verbose=true
-          -Dsonar.login=$SONAR_TOKEN
           -Dsonar.sources="src/main/js"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,4 +34,3 @@ jobs:
 #           -Dsonar.test.exclusions=tests/**
 #           -Dsonar.tests=tests/
 # projectBaseDir: src/main/js
-
