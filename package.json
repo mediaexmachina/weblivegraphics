@@ -19,7 +19,8 @@
     },
     "scripts": {
         "watch": "node_modules/.bin/webpack --watch",
-        "install": "node_modules/.bin/webpack --config webpack.config.prod.js"
+        "install": "node_modules/.bin/webpack --config webpack.config.prod.js",
+        "test": "jest --config=jest.config.js"
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",
@@ -30,6 +31,7 @@
         "css-loader": "^6.5.1",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.5.0",
+        "jest": "^27.3.1",
         "license-checker-webpack-plugin": "^0.2.1",
         "style-loader": "^3.3.1",
         "webpack": "^5.64.1",
