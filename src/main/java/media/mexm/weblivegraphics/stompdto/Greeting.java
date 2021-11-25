@@ -14,29 +14,23 @@
  * Copyright (C) Media ex Machina 2021
  *
  */
-'use strict';
+package media.mexm.weblivegraphics.stompdto;
 
-import { Component } from 'react';
-import { render as _render } from 'react-dom';
-import { StompClient } from './stompclient';
+public class Greeting {
+	private String content;
 
-class App extends Component {
-
-	constructor(props) {
-		super(props);
+	public Greeting() {
 	}
 
-	render() {
-		return (
-			<h1>
-				Hello World from React
-				<StompClient />
-			</h1>
-		)
+	public Greeting(final String content) {
+		this.content = content;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(final String content) {
+		this.content = content;
 	}
 }
-
-_render(
-	<App />,
-	document.getElementById('react')
-)

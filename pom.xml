@@ -22,10 +22,12 @@
 		<sonar.sources>src/main/js</sonar.sources>
 	</properties>
 
-	<!-- dependencies>
+	<dependencies>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-	</dependencies-->
+	</dependencies>
 
 	<scm>
 		<connection>scm:git:https://github.com/mediaexmachina/weblivegraphics.git</connection>

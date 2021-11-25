@@ -3,8 +3,8 @@ Do Not Translate or Localize
 
 
 --------------------------------------------------------------------------------
-babel-loader v8.2.3 - Luis Couto <hello@luiscouto.pt>
-https://github.com/babel/babel-loader.git
+babel-loader v8.2.3 - Luis Couto
+git+https://github.com/babel/babel-loader.git
 --------------------------------------------------------------------------------
 
 Copyright (c) 2014-2019 Luís Couto <hello@luiscouto.pt>
