@@ -21,6 +21,11 @@ module.exports = {
     devtool: 'source-map',
     cache: true,
     mode: 'development',
+    watch: true,
+    watchOptions: {
+        aggregateTimeout: 200,
+        poll: 1000
+     },
     output: {
         path: __dirname,
         filename: 'target/classes/static/bundle.js'

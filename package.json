@@ -19,9 +19,10 @@
         "react-dom": "^17.0.1"
     },
     "scripts": {
-        "watch": "node_modules/.bin/webpack --watch",
+        "watch": "node_modules/.bin/webpack",
         "install": "node_modules/.bin/webpack --config webpack.config.prod.js",
-        "test": "jest --config=jest.config.js"
+        "test": "jest --config=jest.config.js",
+        "back": "mvn spring-boot:run -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN -DskipTests -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -Dspring-boot.run.noverify=true -Dspring-boot.run.jvmArguments=\"-Dlogging.config=src/test/js/back-config/log4j2.xml\" -Dspring-boot.run.arguments=\"--spring.config.location=src/test/js/back-config/application.yml\""
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",

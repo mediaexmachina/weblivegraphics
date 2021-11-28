@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console OUT" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="%d{HH:mm:ss,SSS} %-5p %c{1} &#8249;%t&#8250;&#9;&#8220;%m&#8221;%n &#8227; %C.%M(%F:%L)%n%n" />
+			<ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL" />
+		</Console>
+
+		<Console name="Console ERR" target="SYSTEM_ERR" follow="true">
+			<PatternLayout pattern="%d{HH:mm:ss,SSS} %-5p %c{1} &#8249;%t&#8250;&#9;&#8220;%m&#8221;%n &#8227; %C.%M(%F:%L)%n%n" />
+			<ThresholdFilter level="WARN" />
+		</Console>
+
+		<Console name="Console OUT Light" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="%-5p %m%n" />
+			<ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL" />
+		</Console>
+
+		<Console name="Console ERR Light" target="SYSTEM_ERR" follow="true">
+			<PatternLayout pattern="%-5p %m%n" />
+			<ThresholdFilter level="WARN" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="org.apache.catalina.startup.DigesterFactory" level="error" />
+		<Logger name="org.apache.catalina.util.LifecycleBase" level="error" />
+		<Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />
+		<logger name="org.apache.sshd.common.util.SecurityUtils" level="warn" />
+		<Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />
+		<Logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="error" />
+		<Logger name="org.hibernate.validator.internal.util.Version" level="warn" />
+		<logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn" />
+		<logger name="org.springframework.boot.web.embedded.tomcat.TomcatWebServer" level="info" />
+		<logger name="org.apache.catalina.valves.AccessLogValve" level="trace" />
+
+		<Logger name="tv.hd3g" level="info" />
+        <Logger name="media.mexm" level="info" />
+
+		<Root level="warn">
+			<AppenderRef ref="Console OUT Light" />
+			<AppenderRef ref="Console ERR Light" />
+		</Root>
+	</Loggers>
+
+</Configuration>

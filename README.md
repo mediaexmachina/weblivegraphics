@@ -70,3 +70,13 @@ npm run test
 You don't need a valid/running/configured Java application to run JS tests.
 
 You'll found JS test files in `src/test/js`.
+
+### Run Java application from JS environment
+
+Just run:
+
+```bash
+npm run back
+```
+
+For start Spring Boot app via maven in "js dev mod". Configuration files will be founded on `src/test/js/back-config`.

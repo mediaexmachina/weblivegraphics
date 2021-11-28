@@ -1,0 +1,13 @@
+# Special configuration for run front (manual user) tests
+# Do not use in production
+
+spring:
+    main:
+        banner-mode: "off"
+        log-startup-info: false
+server:
+    address: 0.0.0.0
+    port: 8080
+
+js:
+    devmode: true
