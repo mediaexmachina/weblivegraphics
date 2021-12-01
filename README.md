@@ -1,10 +1,10 @@
 # weblivegraphics
 
-Display live informations and events on your live stream via web pages.
+Display live informations and events (from external sites, like YouTube or Twitch) on your live stream via a special web pages. This web page be will be able to be put as "Web source" on OBS Studio.
 
-Front is on Javascript/NPM/React.
+Front is on Node JS/NPM/React/Bootstrap (in admin pages).
 
-Back is on Java 11/Spring Boot
+Back is on Java 11/Spring Boot/Maven with the help of YouTube/Twitch APIs.
 
 _It's still in alpha._
 
