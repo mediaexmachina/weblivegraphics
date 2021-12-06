@@ -24,6 +24,7 @@ node_modules
 *.orig
 package-lock.json
 src/main/resources/static/bundle-prod.js
+src/main/resources/static/main.css
 
 # STS
 .apt_generated

@@ -18,6 +18,7 @@ var path = require('path');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const LicenseCheckerWebpackPlugin = require("license-checker-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: './src/main/js/app.js',
@@ -25,13 +26,17 @@ module.exports = {
     mode: 'production',
     plugins: [
         new LicenseCheckerWebpackPlugin({
-        outputFilename: "./THIRD-PARTY-JS.txt",
-    })],
+            outputFilename: "./THIRD-PARTY-JS.txt",
+        }),
+        new MiniCssExtractPlugin({
+            filename: "src/main/resources/static/[name].css",
+            chunkFilename: "src/main/resources/static/[id].css"
+        })],
     optimization: {
         minimizer: [
             new TerserPlugin({
-            extractComments: false,
-        })],
+                extractComments: false,
+            })],
     },
     output: {
         path: __dirname,
@@ -39,18 +44,34 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: path.join(__dirname, '.'),
-                exclude: /(node_modules)/,
-                use: [{
-                    loader: 'babel-loader',
+            test: path.join(__dirname, '.'),
+            exclude: /(node_modules)/,
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        "@babel/preset-env",
+                        ["@babel/preset-react", { "runtime": "automatic" }]
+                    ]
+                }
+            }]
+        }, {
+            test: /\.s[ac]ss$/i,
+            use: [
+                MiniCssExtractPlugin.loader,
+                {
+                    loader: "css-loader",
                     options: {
-                        presets: [
-                            "@babel/preset-env",
-                            ["@babel/preset-react", {"runtime": "automatic"}]
-                        ]
-                    }
-                }]
-            }
-        ]
+                        sourceMap: false,
+                    },
+                }, {
+                    loader: "sass-loader",
+                    options: {
+                        warnRuleAsWarning: true,
+                        sourceMap: false,
+                    },
+                }
+            ]
+        }]
     }
 };

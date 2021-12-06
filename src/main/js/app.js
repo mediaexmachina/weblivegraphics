@@ -16,6 +16,7 @@
  */
 'use strict';
 
+import css from './app.scss'; //NOSONAR S1128
 import { Component } from 'react';
 import { render as _render } from 'react-dom';
 import { StompClient } from './stompclient';
