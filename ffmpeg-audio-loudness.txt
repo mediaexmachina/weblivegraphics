@@ -1,0 +1,8 @@
+
+ffmpeg.exe -list_devices true -f dshow -i dummy
+
+"Microphone Array (Realtek(R) Audio)"
+
+ffmpeg.exe -f dshow -i audio="Microphone Array (Realtek(R) Audio)" -filter_complex [0:a]ebur128=video=1:meter=9:target=-15:gauge=shortterm:scale=absolute[v][a],[a]anullsink -map '[v]' -f sdl2 -
+
+ffmpeg.exe -f dshow -i audio="Microphone Array (Realtek(R) Audio)" -af ebur128=target=-15:peak=true -f null -
