@@ -13,8 +13,8 @@
 
 	<parent>
 		<groupId>tv.hd3g.commons</groupId>
-		<artifactId>parent-web</artifactId>
-		<version>4.0.0</version>
+		<artifactId>app-web</artifactId>
+		<version>7.0.0</version>
 		<relativePath />
 	</parent>
 
@@ -40,33 +40,4 @@
 		<system>GitHub</system>
 	</issueManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
