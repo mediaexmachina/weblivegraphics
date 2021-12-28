@@ -16,25 +16,30 @@
  */
 package media.mexm.weblivegraphics;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
-public class Setup {
+@ConfigurationProperties(prefix = "weblivegraphics")
+public class AppConf {
 
-	@Bean
-	public MessageSource messageSource() {
-		return new ResourceBundleMessageSource();
+	private String vendorProps;
+	private String baseBackgroundFile;
+
+	public String getVendorProps() {
+		return vendorProps;
 	}
 
-	@Bean
-	public VendorSetup vendorSetup(@Autowired final AppConf appConf) throws IOException {
-		return new VendorSetup(new File(appConf.getVendorProps()));
+	public void setVendorProps(final String vendorProps) {
+		this.vendorProps = vendorProps;
 	}
+
+	public String getBaseBackgroundFile() {
+		return baseBackgroundFile;
+	}
+
+	public void setBaseBackgroundFile(final String baseBackgroundFile) {
+		this.baseBackgroundFile = baseBackgroundFile;
+	}
+
 }

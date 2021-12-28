@@ -22,13 +22,19 @@
     <title>WebLiveGraphics</title>
     <link rel="stylesheet" type="text/css" th:href="@{https://mexm.media/font-source-sans-pro/font.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
+    <style th:inline="text">
+        body {
+            background-image: url('[[@{/background.png}]]');
+        }
+    </style>
 </head>
 
 <body>
-    Hello world weblivegraphics
     <div id="react"></div>
+    <script th:inline="javascript">/*<![CDATA[*/
+    var pagekind = /*[[${pagekind}]]*/ 'default';
+    /*]]>*/</script>
     <script th:if="${devmode}" src="bundle.js"></script>
     <script th:unless="${devmode}" src="bundle-prod.js"></script>
 </body>
-
 </html>

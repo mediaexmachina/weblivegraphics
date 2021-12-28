@@ -27,10 +27,13 @@ class App extends Component {
 	}
 
 	render() {
+		//if (pagekind !== "program") {
+		//}
 		return (
-			<h1>
-				Hello World from React
-			</h1>
+			<div>
+				<header>Header</header>
+				<aside>Hello World from React</aside>
+			</div>
 		)
 	}
 }
