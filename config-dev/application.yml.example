@@ -11,3 +11,7 @@ server:
 
 js:
     devmode: true
+
+weblivegraphics:
+    vendorProps: vendor/vendor.properties
+    baseBackgroundFile: vendor/background.png
