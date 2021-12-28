@@ -13,7 +13,7 @@ Lists of 103 third-party dependencies.
      (LGPL) JSAP (com.martiansoftware:jsap:2.1 - http://www.martiansoftware.com/jsap/)
      (Apache License 2.0) JSON library from Android SDK (com.vaadin.external.google:android-json:0.0.20131108.vaadin1 - http://developer.android.com/sdk)
      (Apache License, Version 2.0) Apache Commons Codec (commons-codec:commons-codec:1.15 - https://commons.apache.org/proper/commons-codec/)
-     (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.8.0 - https://commons.apache.org/proper/commons-io/)
+     (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.11.0 - https://commons.apache.org/proper/commons-io/)
      (BSD) Automaton (dk.brics.automaton:automaton:1.11-8 - http://www.brics.dk/automaton/)
      (CeCILL-C) Spoon Core (fr.inria.gforge.spoon:spoon-core:8.4.0 - http://spoon.gforge.inria.fr/)
      (EDL 1.0) Jakarta Activation API jar (jakarta.activation:jakarta.activation-api:1.2.2 - https://github.com/eclipse-ee4j/jaf/jakarta.activation-api)
