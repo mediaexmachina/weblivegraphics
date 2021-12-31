@@ -19,7 +19,6 @@
 import css from './app.scss'; //NOSONAR S1128
 import { Component } from 'react';
 import { render as _render } from 'react-dom';
-import { StompClient } from './stompclient';
 
 class App extends Component {
 
@@ -31,7 +30,6 @@ class App extends Component {
 		return (
 			<h1>
 				Hello World from React
-				<StompClient />
 			</h1>
 		)
 	}
