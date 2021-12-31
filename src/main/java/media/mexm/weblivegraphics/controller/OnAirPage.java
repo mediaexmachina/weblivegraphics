@@ -16,6 +16,8 @@
  */
 package media.mexm.weblivegraphics.controller;
 
+import static org.springframework.http.MediaType.IMAGE_PNG;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,7 +25,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,12 +54,12 @@ public class OnAirPage {
 	}
 
 	@GetMapping("/background.png")
-	public ResponseEntity<InputStreamResource> downloadFile1() throws IOException {
+	public ResponseEntity<InputStreamResource> getBackgroundImage() throws IOException {
 		final var file = new File(appConf.getBaseBackgroundFile());
 		final var resource = new InputStreamResource(new FileInputStream(file));
 		return ResponseEntity
 		        .ok()
-		        .contentType(MediaType.IMAGE_PNG)
+		        .contentType(IMAGE_PNG)
 		        .contentLength(file.length())
 		        .body(resource);
 	}

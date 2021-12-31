@@ -13,5 +13,5 @@ js:
     devmode: true
 
 weblivegraphics:
-    vendorProps: vendor/vendor.properties
-    baseBackgroundFile: vendor/background.png
+    vendorProps: src/test/resources/vendor-test.properties
+    baseBackgroundFile: src/test/resources/background-test.png
