@@ -19,6 +19,7 @@
 import css from './app.scss'; //NOSONAR S1128
 import { Component } from 'react';
 import { render as _render } from 'react-dom';
+import { Main } from './main';
 
 class App extends Component {
 
@@ -27,14 +28,7 @@ class App extends Component {
 	}
 
 	render() {
-		//if (pagekind !== "program") {
-		//}
-		return (
-			<div>
-				<header>Header</header>
-				<aside>Hello World from React</aside>
-			</div>
-		)
+		return (<Main />)
 	}
 }
 

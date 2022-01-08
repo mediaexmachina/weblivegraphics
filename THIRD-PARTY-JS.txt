@@ -59,7 +59,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-mini-css-extract-plugin v2.4.5 - Tobias Koppers @sokra
+mini-css-extract-plugin v2.4.6 - Tobias Koppers @sokra
 webpack-contrib/mini-css-extract-plugin
 --------------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-sass-loader v12.3.0 - J. Tangelder
+sass-loader v12.4.0 - J. Tangelder
 webpack-contrib/sass-loader
 --------------------------------------------------------------------------------
 

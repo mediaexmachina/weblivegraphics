@@ -11,36 +11,25 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
- * Copyright (C) Media ex Machina 2021
+ * Copyright (C) Media ex Machina 2022
  *
  */
-body {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 200;
-  font-size: 2.5vw;
+'use strict';
 
-  overflow: hidden;
-  background-size: cover;
-  background-repeat: no-repeat;
-  //background-color: aqua;
-  margin: 0;
-  padding: 0;
-}
+import React, { Component } from 'react';
 
-header {
-  text-align: center;
-  color: white;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
+export class Main extends Component {
 
-aside {
-  background-color: burlywood;
-  position: fixed;
-  top: 2em;
-  right: 2em;
-  margin-left: 1em;
-  margin-right: 1em;
-  border: 1px solid black;
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div>
+				<header>Header</header>
+				<aside>Hello World from React</aside>
+			</div>
+		)
+	}
 }

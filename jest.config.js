@@ -11,7 +11,7 @@ module.exports = {
   ],
 
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  automock: false,
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -85,7 +85,9 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    "^.+\\.(css|less|scss)$": "babel-jest"
+  }
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
