@@ -41,7 +41,7 @@ jobs:
         -Dsonar.projectKey=mediaexmachina_weblivegraphics
         -Dsonar.organization=mediaexmachina
         -Dsonar.host.url=https://sonarcloud.io
-        -Dsonar.sources="src/main/java,src/main/resources,src/main/js"
+        -Dsonar.sources="src/main/java,src/main/resources,modules"
         -Dsonar.login=$SONAR_TOKEN
         -Dsonar.java.source=11
         -Dsonar.javascript.lcov.reportPaths="target/jest-coverage/lcov.info"

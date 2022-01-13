@@ -6,8 +6,8 @@
 module.exports = {
   
   roots: [
-      "src/main/js",
-      "src/test/js"
+      "modules",
+      "tests"
   ],
 
   // All imported modules in your tests should be mocked automatically
@@ -43,7 +43,7 @@ module.exports = {
   coverageReporters: [
     "lcov"
   ],
-//"json","text","clover"
+  //"json","text","clover"
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,

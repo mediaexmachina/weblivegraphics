@@ -19,7 +19,7 @@
 import React from 'react';
 import { create } from "react-test-renderer";
 
-import { Main } from '../../main/js/main';
+import { Main } from '../modules/main';
 
 test('Check base program page', () => {
 	// https://blog.logrocket.com/tdd-with-react-test-renderer/

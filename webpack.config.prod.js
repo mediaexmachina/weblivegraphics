@@ -21,7 +21,7 @@ const LicenseCheckerWebpackPlugin = require("license-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: './src/main/js/app.js',
+    entry: './modules/app.js',
     cache: true,
     mode: 'production',
     plugins: [
