@@ -18,7 +18,7 @@ var path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: './modules/app.js',
+    entry: './src/main/js/app.js', //Only set for escape from code coverage
     devtool: 'source-map',
     cache: true,
     mode: 'development',

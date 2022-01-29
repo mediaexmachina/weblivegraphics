@@ -16,10 +16,10 @@
  */
 'use strict';
 
-import css from './app.scss'; //NOSONAR S1128
+import css from '../../../modules/app.scss'; //NOSONAR S1128
 import { Component } from 'react';
 import { render as _render } from 'react-dom';
-import { Main } from './main';
+import { Main } from '../../../modules/main';
 
 class App extends Component {
 
