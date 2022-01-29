@@ -19,6 +19,54 @@ Front is on Node 17+ JS/NPM/Webpack/React (in admin pages).
 
 Back is on Java 11/Spring Boot/Maven.
 
+## Configuration
+
+You need to setup some configuration files.
+
+- `application.yml` for main configuration.
+You'll found an example on `config-dev` directory.
+See below for more details.
+- `log4j2.xml` for log configurations.
+You'll found an example on `config-dev` directory.
+Setup as you want, nothing special here.
+- `vendor.properties` will contain secrets and special
+file references for setup the application, across updates.
+It will be created if not found.
+This file path will be setup in `application.yml`.
+
+### application.yml
+
+Configuration keys and usage for application.yml, in addition to standard Spring Boot options.
+
+```yml
+server:
+    address: 0.0.0.0
+    port: 8080
+```
+
+You should setup address and port to listen connections from web server.
+
+```yml
+weblivegraphics:
+    vendorProps: /path/to/vendor.properties
+    baseBackgroundFile: /path/to/background.png
+```
+
+Specific weblivegraphics configuration keys, mandatory.
+
+`weblivegraphics.vendorProps` for the vendor.properties file to point and create if needed.
+
+`weblivegraphics.baseBackgroundFile` for put default background file (png, transparent, 16/9 file).
+
+```yml
+js:
+    devmode: true | false
+```
+
+Active dev mode for backend web server, optional, false by default.
+
+See below for usage; basically for start web app with dev JS files or prod files)
+
 ## Roadmap
 
 Actual roadmap can be found on GitHub [Projects](https://github.com/mediaexmachina/weblivegraphics/projects) tab.
