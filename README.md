@@ -24,19 +24,19 @@ Back is on Java 11/Spring Boot/Maven.
 You need to setup some configuration files.
 
 - `application.yml` for main configuration.
-You'll found an example on `config-dev` directory.
-See below for more details.
+  You'll found an example on `config-dev` directory.
+  See below for more details.
 - `log4j2.xml` for log configurations.
-You'll found an example on `config-dev` directory.
-Setup as you want, nothing special here.
+  You'll found an example on `config-dev` directory.
+  Setup as you want, nothing special here.
 - `vendor.properties` will contain secrets and special
-file references for setup the application, across updates.
-It will be created if not found.
-This file path will be setup in `application.yml`.
+  file references for setup the application, across updates.
+  It will be created if not found.
+  This file path will be setup in `application.yml`.
 
 ### application.yml
 
-Configuration keys and usage for application.yml, in addition to standard Spring Boot options.
+Configuration keys and usage for `application.yml`, in addition to standard Spring Boot options.
 
 ```yml
 server:
@@ -44,7 +44,7 @@ server:
     port: 8080
 ```
 
-You should setup address and port to listen connections from web server.
+You should setup `address` and `port` to listen connections from web server.
 
 ```yml
 weblivegraphics:
@@ -165,6 +165,22 @@ npm run back
 For start Spring Boot app via maven in "js dev mod".
 Configuration files will be founded on `src/test/js/back-config`.
 
+### Automatic code formatting
+
+Via Prettier (in Node/NPM world).
+
+Just run:
+
+```bash
+npx prettier --write .
+```
+
+And just for check w/o modify files:
+
+```bash
+npx prettier --check .
+```
+
 </details>
 
 ## Contribution
@@ -176,9 +192,9 @@ Some rules must to be followed:
 - PR must pass all internal test
 - Code should be tested at it's best
 - Please use a code linter for Java and JavaScript.
-I can provide Eclipse linter configuration.
-Free feel to propose one for JS.
+  I can provide Eclipse linter configuration.
+  Free feel to propose one for JS.
 - Security and stability is most important than new functionalities,
-and always must be prioritized.
+  and always must be prioritized.
 - Code quality is the third priority before new functionalities,
-in particular for the production of a visible, broadcasted, video live stream.
+  in particular for the production of a visible, broadcasted, video live stream.

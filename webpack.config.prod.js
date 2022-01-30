@@ -14,64 +14,75 @@
  * Copyright (C) Media ex Machina 2021
  *
  */
-var path = require('path');
+var path = require("path");
 
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 const LicenseCheckerWebpackPlugin = require("license-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: './src/main/js/app.js', //Only set for escape from code coverage
+    entry: "./src/main/js/app.js", //Only set for escape from code coverage
     cache: true,
-    mode: 'production',
+    mode: "production",
     plugins: [
         new LicenseCheckerWebpackPlugin({
             outputFilename: "./THIRD-PARTY-JS.txt",
         }),
         new MiniCssExtractPlugin({
             filename: "src/main/resources/static/[name].css",
-            chunkFilename: "src/main/resources/static/[id].css"
-        })],
+            chunkFilename: "src/main/resources/static/[id].css",
+        }),
+    ],
     optimization: {
         minimizer: [
             new TerserPlugin({
                 extractComments: false,
-            })],
+            }),
+        ],
     },
     output: {
         path: __dirname,
-        filename: 'src/main/resources/static/bundle-prod.js'
+        filename: "src/main/resources/static/bundle-prod.js",
     },
     module: {
-        rules: [{
-            test: path.join(__dirname, '.'),
-            exclude: /(node_modules)/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        "@babel/preset-env",
-                        ["@babel/preset-react", { "runtime": "automatic" }]
-                    ]
-                }
-            }]
-        }, {
-            test: /\.s[ac]ss$/i,
-            use: [
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: false,
+        rules: [
+            {
+                test: path.join(__dirname, "."),
+                exclude: /(node_modules)/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                "@babel/preset-env",
+                                [
+                                    "@babel/preset-react",
+                                    { runtime: "automatic" },
+                                ],
+                            ],
+                        },
                     },
-                }, {
-                    loader: "sass-loader",
-                    options: {
-                        warnRuleAsWarning: true,
-                        sourceMap: false,
+                ],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: false,
+                        },
                     },
-                }
-            ]
-        }]
-    }
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            warnRuleAsWarning: true,
+                            sourceMap: false,
+                        },
+                    },
+                ],
+            },
+        ],
+    },
 };

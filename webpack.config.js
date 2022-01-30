@@ -14,53 +14,62 @@
  * Copyright (C) Media ex Machina 2021
  *
  */
-var path = require('path');
+var path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: './src/main/js/app.js', //Only set for escape from code coverage
-    devtool: 'source-map',
+    entry: "./src/main/js/app.js", //Only set for escape from code coverage
+    devtool: "source-map",
     cache: true,
-    mode: 'development',
+    mode: "development",
     plugins: [
         new MiniCssExtractPlugin({
             filename: "target/classes/static/[name].css",
-            chunkFilename: "target/classes/static/[id].css"
-        })],
+            chunkFilename: "target/classes/static/[id].css",
+        }),
+    ],
     watch: true,
     watchOptions: {
         aggregateTimeout: 200,
-        poll: 1000
+        poll: 1000,
     },
     output: {
         path: __dirname,
-        filename: 'target/classes/static/bundle.js'
+        filename: "target/classes/static/bundle.js",
     },
     module: {
-        rules: [{
-            test: path.join(__dirname, '.'),
-            exclude: /(node_modules)/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        "@babel/preset-env",
-                        ["@babel/preset-react", { "runtime": "automatic" }]
-                    ]
-                }
-            }]
-        }, {
-            test: /\.s[ac]ss$/i,
-            use: [
-                MiniCssExtractPlugin.loader,
-                "css-loader",
-                {
-                    loader: "sass-loader",
-                    options: {
-                        warnRuleAsWarning: true,
+        rules: [
+            {
+                test: path.join(__dirname, "."),
+                exclude: /(node_modules)/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                "@babel/preset-env",
+                                [
+                                    "@babel/preset-react",
+                                    { runtime: "automatic" },
+                                ],
+                            ],
+                        },
                     },
-                }
-            ]
-        }]
-    }
+                ],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            warnRuleAsWarning: true,
+                        },
+                    },
+                ],
+            },
+        ],
+    },
 };

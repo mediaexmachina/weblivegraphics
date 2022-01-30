@@ -14,20 +14,20 @@
  * Copyright (C) Media ex Machina 2022
  *
  */
-'use strict';
+"use strict";
 
-import React from 'react';
+import React from "react";
 import { create } from "react-test-renderer";
 
-import { Main } from '../modules/main';
+import { Main } from "../modules/main";
 
-test('Check base program page', () => {
-	// https://blog.logrocket.com/tdd-with-react-test-renderer/
-  // https://fr.reactjs.org/docs/test-renderer.html
+test("Check base program page", () => {
+    // https://blog.logrocket.com/tdd-with-react-test-renderer/
+    // https://fr.reactjs.org/docs/test-renderer.html
 
-  const rendered = create(<Main />);
-  //console.log(rendered.toJSON());
-  const root = rendered.root;
-  const element = root.findByType("div");
-  expect(element.children.length).toBe(2);
+    const rendered = create(<Main />);
+    //console.log(rendered.toJSON());
+    const root = rendered.root;
+    const element = root.findByType("div");
+    expect(element.children.length).toBe(2);
 });

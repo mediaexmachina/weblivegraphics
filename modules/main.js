@@ -14,22 +14,21 @@
  * Copyright (C) Media ex Machina 2022
  *
  */
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export class Main extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<div>
-				<header>Header</header>
-				<aside>Hello World from React</aside>
-			</div>
-		)
-	}
+    render() {
+        return (
+            <div>
+                <header>Header</header>
+                <aside>Hello World from React</aside>
+            </div>
+        );
+    }
 }

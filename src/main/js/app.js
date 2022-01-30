@@ -14,25 +14,21 @@
  * Copyright (C) Media ex Machina 2021
  *
  */
-'use strict';
+"use strict";
 
-import css from '../../../modules/app.scss'; //NOSONAR S1128
-import { Component } from 'react';
-import { render as _render } from 'react-dom';
-import { Main } from '../../../modules/main';
+import css from "../../../modules/app.scss"; //NOSONAR S1128
+import { Component } from "react";
+import { render as _render } from "react-dom";
+import { Main } from "../../../modules/main";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (<Main />)
-	}
+    render() {
+        return <Main />;
+    }
 }
 
-_render(
-	<App />,
-	document.getElementById('react')
-)
+_render(<App />, document.getElementById("react"));
