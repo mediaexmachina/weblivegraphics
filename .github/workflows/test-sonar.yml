@@ -24,7 +24,10 @@ jobs:
               with:
                   node-version: "16"
             - run: npm install
-            - run: npm run test
+            - name: Check if code is correctly formatted
+              run: npx prettier --check .
+            - name: Run JS front test
+              run: npm run test
 
             - name: Restore pom file
               run: git reset --hard
