@@ -25,6 +25,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
+import media.mexm.weblivegraphics.dto.OutputLayersDto;
+
 @Configuration
 public class Setup {
 
@@ -37,4 +39,10 @@ public class Setup {
 	public VendorSetup vendorSetup(@Autowired final AppConf appConf) throws IOException {
 		return new VendorSetup(new File(appConf.getVendorProps()));
 	}
+
+	@Bean
+	public OutputLayersDto getOutputLayers() {
+		return new OutputLayersDto();
+	}
+
 }
