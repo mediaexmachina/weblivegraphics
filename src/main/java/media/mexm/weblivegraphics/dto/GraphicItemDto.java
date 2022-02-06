@@ -16,9 +16,8 @@
  */
 package media.mexm.weblivegraphics.dto;
 
+import java.util.Map;
 import java.util.UUID;
-
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 public class GraphicItemDto {
 
@@ -26,7 +25,7 @@ public class GraphicItemDto {
 	private String label;
 	private boolean active;
 	private String typeName;
-	private JSONObject setup;
+	private Map<String, Object> setup;
 
 	public UUID getId() {
 		return id;
@@ -60,11 +59,11 @@ public class GraphicItemDto {
 		this.typeName = typeName;
 	}
 
-	public JSONObject getSetup() {
+	public Map<String, Object> getSetup() {
 		return setup;
 	}
 
-	public void setSetup(final JSONObject setup) {
+	public void setSetup(final Map<String, Object> setup) {
 		this.setup = setup;
 	}
 

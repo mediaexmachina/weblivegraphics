@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import com.github.javafaker.Faker;
 
@@ -93,7 +93,7 @@ class GraphicItemDtoTest {
 
 	@Test
 	void testSetSetup() {
-		final var setup = new JSONObject();
+		final var setup = new HashMap<String, Object>();
 		dto.setSetup(setup);
 		assertEquals(setup, dto.getSetup());
 	}
