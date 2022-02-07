@@ -21,23 +21,28 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.mockito.internal.util.MockUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.github.javafaker.Faker;
 
 import media.mexm.weblivegraphics.dto.GraphicItemDto;
 import media.mexm.weblivegraphics.dto.GraphicKeyerDto;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
-import media.mexm.weblivegraphics.service.GraphicService;
 
 @SpringBootTest
+@ActiveProfiles({ "StompMock" })
 class GraphicServiceTest {
 
 	private static final Faker faker = Faker.instance();
@@ -46,12 +51,12 @@ class GraphicServiceTest {
 	GraphicService graphicService;
 	@Autowired
 	OutputLayersDto layers;
+	@Autowired
+	SimpMessagingTemplate simpMessagingTemplate;
 
 	String keyerLabel;
 	String itemLabel;
 	String typeName;
-
-	// TODO check sended events
 
 	@BeforeEach
 	void init() {
@@ -62,6 +67,9 @@ class GraphicServiceTest {
 		keyerLabel = faker.name().fullName();
 		itemLabel = faker.name().fullName();
 		typeName = faker.company().name();
+
+		assertTrue(MockUtil.isMock(simpMessagingTemplate));
+		Mockito.reset(simpMessagingTemplate);
 	}
 
 	@AfterEach
@@ -69,6 +77,13 @@ class GraphicServiceTest {
 		layers.setDownStreamKeyer(null);
 		layers.setFullBypass(false);
 		layers.setKeyers(null);
+
+		Mockito.verifyNoMoreInteractions(simpMessagingTemplate);
+	}
+
+	void checkIsRefresh(final int count) {
+		Mockito.verify(simpMessagingTemplate, times(count))
+		        .convertAndSend("/topic/layers", layers);
 	}
 
 	@Test
@@ -80,8 +95,10 @@ class GraphicServiceTest {
 	void testSetFullBypass() {
 		graphicService.setFullBypass(true);
 		assertTrue(layers.isFullBypass());
+
 		graphicService.setFullBypass(false);
 		assertFalse(layers.isFullBypass());
+		checkIsRefresh(2);
 	}
 
 	private void checkAddKeyer(final GraphicKeyerDto addedKeyer) {
@@ -125,6 +142,7 @@ class GraphicServiceTest {
 		assertFalse(addedKeyer.isActivePreview());
 		checkAddItem(addedKeyer, addedItem);
 		assertNull(addedItem.getSetup());
+		checkIsRefresh(1);
 	}
 
 	@Test
@@ -142,6 +160,7 @@ class GraphicServiceTest {
 
 		graphicService.setActiveItem(addedItem.getId(), false);
 		assertFalse(addedItem.isActive());
+		checkIsRefresh(2);
 	}
 
 	@Test
@@ -151,6 +170,7 @@ class GraphicServiceTest {
 		checkAddKeyer(addedKeyer);
 		assertTrue(addedKeyer.isActiveProgram());
 		assertFalse(addedKeyer.isActivePreview());
+		checkIsRefresh(1);
 	}
 
 	@Test
@@ -161,6 +181,7 @@ class GraphicServiceTest {
 		checkAddKeyer(addedKeyer);
 		assertFalse(addedKeyer.isActiveProgram());
 		assertTrue(addedKeyer.isActivePreview());
+		checkIsRefresh(1);
 	}
 
 	@Test
@@ -172,6 +193,7 @@ class GraphicServiceTest {
 		checkAddKeyer(addedKeyer);
 		assertTrue(addedKeyer.isActiveProgram());
 		assertTrue(addedKeyer.isActivePreview());
+		checkIsRefresh(2);
 	}
 
 	@Test
@@ -190,10 +212,12 @@ class GraphicServiceTest {
 		checkAddItem(addedKeyer, addedItem);
 		assertTrue(addedItem.isActive());
 		assertEquals(json, addedItem.getSetup());
+		checkIsRefresh(2);
 	}
 
 	@Test
 	void testRefresh() {
-		// TODO check refresh
+		graphicService.refresh();
+		checkIsRefresh(1);
 	}
 }

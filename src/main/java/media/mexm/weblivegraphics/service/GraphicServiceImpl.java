@@ -25,6 +25,7 @@ import java.util.UUID;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import media.mexm.weblivegraphics.dto.GraphicItemDto;
@@ -37,6 +38,8 @@ public class GraphicServiceImpl implements GraphicService {
 
 	@Autowired
 	private OutputLayersDto layers;
+	@Autowired
+	private SimpMessagingTemplate template;
 
 	@Override
 	public OutputLayersDto getLayers() {
@@ -161,7 +164,7 @@ public class GraphicServiceImpl implements GraphicService {
 
 	@Override
 	public void refresh() {
-		log.debug("Do refresh");
-		// TODO Auto-generated method stub
+		log.debug("Do refresh layers to clients");
+		template.convertAndSend("/topic/layers", layers);
 	}
 }
