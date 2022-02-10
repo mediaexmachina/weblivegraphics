@@ -17,15 +17,21 @@
 "use strict";
 
 import React, { Component } from "react";
+import { StompClient } from "./StompClient";
 
 export class Main extends Component {
     constructor(props) {
         super(props);
     }
 
+    onLayersUpdate(message) {
+        console.log("Layers, from Main: ", JSON.parse(message.body)); //TODO REMOVE
+    }
+
     render() {
         return (
             <div>
+                <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
                 <header>Header</header>
                 <aside>Hello World from React</aside>
             </div>
