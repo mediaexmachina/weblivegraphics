@@ -21,7 +21,6 @@
     "scripts": {
         "watch": "node_modules/.bin/webpack",
         "install": "node_modules/.bin/webpack --config webpack.config.prod.js",
-        "test": "jest --config=jest.config.js",
         "back": "mvn spring-boot:run -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN -DskipTests -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -Dspring-boot.run.noverify=true -Dspring-boot.run.jvmArguments=\"-Dlogging.config=config-dev/log4j2.xml\" -Dspring-boot.run.arguments=\"--spring.config.location=config-dev/application.yml\""
     },
     "devDependencies": {
@@ -34,7 +33,6 @@
         "css-loader": "^6.5.1",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.5.0",
-        "jest": "^27.3.1",
         "license-checker-webpack-plugin": "^0.2.1",
         "mini-css-extract-plugin": "^2.4.5",
         "prettier": "2.5.1",

@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java and javascript CI with Maven, Jest and SonarCloud
+name: Java and javascript CI with Maven and SonarCloud
 
 on:
     push:
@@ -26,8 +26,6 @@ jobs:
             - run: npm install
             - name: Check if code is correctly formatted
               run: npx prettier --check .
-            - name: Run JS front test
-              run: npm run test
 
             - name: Restore pom file
               run: git reset --hard
@@ -44,10 +42,9 @@ jobs:
                   -Dsonar.projectKey=mediaexmachina_weblivegraphics
                   -Dsonar.organization=mediaexmachina
                   -Dsonar.host.url=https://sonarcloud.io
-                  -Dsonar.sources="src/main/java,src/main/resources,modules"
+                  -Dsonar.sources="src/main/java,src/main/resources"
                   -Dsonar.login=$SONAR_TOKEN
                   -Dsonar.java.source=11
-                  -Dsonar.javascript.lcov.reportPaths="target/jest-coverage/lcov.info"
                   --file pom.xml
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
