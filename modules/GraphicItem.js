@@ -17,31 +17,26 @@
 "use strict";
 
 import React, { Component } from "react";
-import { StompClient } from "./StompClient";
-import { OutputLayers } from "./OutputLayers";
 
-export class Main extends Component {
+export class GraphicItem extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-    }
-
-    onLayersUpdate(message) {
-        const lastLayers = JSON.parse(message.body);
-        this.setState({"lastLayers": lastLayers});
     }
 
     render() {
-        const lastLayers = this.state.lastLayers;
-        if (typeof lastLayers == "undefined") {
-            return <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />;
+        const item = this.props.item;
+        if (item.active == false) {
+            return null;
         }
-
+        /*
+    	private UUID id;
+	    private String label;
+	    private Map<String, Object> setup;
+        */
         return (
             <div>
-                <OutputLayers lastLayers={lastLayers} />
-                <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
+                {item.typeName}
             </div>
         );
-}
+    }
 }

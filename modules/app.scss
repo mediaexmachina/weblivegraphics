@@ -27,6 +27,17 @@ body {
     padding: 0;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+div.center-center {
+    font-size: 120%;
+    position: fixed;
+    top: 30%;
+    left: 30%;
+}
+
 header {
     text-align: center;
     color: white;

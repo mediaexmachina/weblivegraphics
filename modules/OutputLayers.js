@@ -17,31 +17,32 @@
 "use strict";
 
 import React, { Component } from "react";
-import { StompClient } from "./StompClient";
-import { OutputLayers } from "./OutputLayers";
+import { GraphicKeyer } from "./GraphicKeyer";
 
-export class Main extends Component {
+export class OutputLayers extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-    }
-
-    onLayersUpdate(message) {
-        const lastLayers = JSON.parse(message.body);
-        this.setState({"lastLayers": lastLayers});
     }
 
     render() {
-        const lastLayers = this.state.lastLayers;
+        const lastLayers = this.props.lastLayers;
         if (typeof lastLayers == "undefined") {
-            return <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />;
+            return null;
+        }
+
+        const fullBypass = lastLayers.fullBypass;
+        const downStreamKeyer = lastLayers.downStreamKeyer;
+        const allKeyers = lastLayers.keyers.slice()
+            .reverse()
+            .map(k => <GraphicKeyer key={k.id} keyer={k} />);
+        if (downStreamKeyer != null) {
+            allKeyers.push(<GraphicKeyer key={downStreamKeyer.id} keyer={downStreamKeyer} />);
         }
 
         return (
-            <div>
-                <OutputLayers lastLayers={lastLayers} />
-                <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
+            <div className={`center-center ${fullBypass ? 'hidden' : ''}`}>
+                {allKeyers}
             </div>
         );
-}
+    }
 }
