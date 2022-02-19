@@ -26,13 +26,10 @@ export class GraphicKeyer extends Component {
 
     render() {
         var keyer = this.props.keyer;
-        const allItems = keyer.items
-            .map(i => <GraphicItem key={i.id} item={i} />);
+        const allItems = keyer.items.map((i) => (
+            <GraphicItem key={i.id} item={i} />
+        ));
 
-        return (
-            <div>
-                {allItems}
-            </div>
-        );
+        return <div>{allItems}</div>;
     }
 }

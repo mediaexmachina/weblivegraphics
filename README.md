@@ -172,13 +172,13 @@ Via Prettier (in Node/NPM world).
 Just run:
 
 ```bash
-npx prettier --write .
+npm run format
 ```
 
 And just for check w/o modify files:
 
 ```bash
-npx prettier --check .
+node_modules/.bin/prettier --check .
 ```
 
 </details>

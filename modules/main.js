@@ -29,13 +29,15 @@ export class Main extends Component {
 
     onLayersUpdate(message) {
         const lastLayers = JSON.parse(message.body);
-        this.setState({"lastLayers": lastLayers});
+        this.setState({ lastLayers: lastLayers });
     }
 
     render() {
         const lastLayers = this.state.lastLayers;
         if (typeof lastLayers == "undefined") {
-            return <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />;
+            return (
+                <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
+            );
         }
         let mainPage = null;
         if (pagekind != null) {

@@ -33,10 +33,6 @@ export class GraphicItem extends Component {
 	    private String label;
 	    private Map<String, Object> setup;
         */
-        return (
-            <div>
-                {item.typeName}
-            </div>
-        );
+        return <div>{item.typeName}</div>;
     }
 }

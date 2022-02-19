@@ -17,7 +17,7 @@
 "use strict";
 
 import React, { Component } from "react";
-import { Client } from '@stomp/stompjs';
+import { Client } from "@stomp/stompjs";
 
 export class StompClient extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ export class StompClient extends Component {
         }
 
         this.stompClient = new Client({
-            brokerURL: 'ws' + secureTag + '://' + location.host + '/ws',
+            brokerURL: "ws" + secureTag + "://" + location.host + "/ws",
             debug: function (str) {
                 console.debug(str);
             },
@@ -43,22 +43,24 @@ export class StompClient extends Component {
     }
 
     componentWillUnmount() {
-        this.state.subscriptions
-            .forEach(sub => sub.unsubscribe());
+        this.state.subscriptions.forEach((sub) => sub.unsubscribe());
         this.stompClient.deactivate();
     }
 
     onConnect(frame) {
         this.setState({
-            "subscriptions": [
-                this.stompClient.subscribe("/topic/layers", this.props.onLayersUpdate)
-            ]
+            subscriptions: [
+                this.stompClient.subscribe(
+                    "/topic/layers",
+                    this.props.onLayersUpdate
+                ),
+            ],
         });
-        fetch(location.protocol + '/v1/weblivegraphics/front/refresh-layers');
+        fetch(location.protocol + "/v1/weblivegraphics/front/refresh-layers");
     }
 
     onStompError(frame) {
-        console.error('Stomp error', frame);
+        console.error("Stomp error", frame);
     }
 
     render() {

@@ -1,3 +1,5 @@
+src/main/resources/templates/index.html
+
 # Node/JS env. conf
 package.json
 
