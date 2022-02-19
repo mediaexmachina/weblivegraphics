@@ -17,22 +17,25 @@
 "use strict";
 
 import React, { Component } from "react";
-import { GraphicItem } from "./GraphicItem";
 
-export class GraphicKeyer extends Component {
+export class BasePage extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        var keyer = this.props.keyer;
-        const allItems = keyer.items
-            .map(i => <GraphicItem key={i.id} item={i} />);
-
         return (
-            <div>
-                {allItems}
-            </div>
+            <main>
+                <p>
+                    <a href="/program">Switch to program screen</a>
+                </p>
+                <p>
+                    <a href="/clean">Switch to clean screen</a>
+                </p>
+                <p>
+                    <a href="/preview">Switch to preview screen</a>
+                </p>
+            </main>
         );
     }
 }

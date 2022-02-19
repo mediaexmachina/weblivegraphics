@@ -34,8 +34,12 @@ export class OutputLayers extends Component {
         const downStreamKeyer = lastLayers.downStreamKeyer;
         const allKeyers = lastLayers.keyers.slice()
             .reverse()
+            .filter(k => k.activeProgram && (pagekind == "program"
+                                          || pagekind == "clean")
+                      || k.activePreview && pagekind == "preview")
             .map(k => <GraphicKeyer key={k.id} keyer={k} />);
-        if (downStreamKeyer != null) {
+
+        if (downStreamKeyer != null && pagekind != "clean") {
             allKeyers.push(<GraphicKeyer key={downStreamKeyer.id} keyer={downStreamKeyer} />);
         }
 

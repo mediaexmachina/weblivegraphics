@@ -35,6 +35,8 @@ import media.mexm.weblivegraphics.AppConf;
 @Controller
 public class OnAirPage {
 
+	private static final String MODEL_INDEX = "index";
+
 	@Value("${js.devmode:false}")
 	private boolean devmode;
 	@Autowired
@@ -43,14 +45,30 @@ public class OnAirPage {
 	@GetMapping("/")
 	public String index(final Model model) {
 		model.addAttribute("devmode", devmode);
-		return "index";
+		return MODEL_INDEX;
 	}
 
 	@GetMapping("/program")
 	public String program(final Model model) {
+		switchOutput("program", model);
+		return MODEL_INDEX;
+	}
+
+	@GetMapping("/clean")
+	public String clean(final Model model) {
+		switchOutput("clean", model);
+		return MODEL_INDEX;
+	}
+
+	@GetMapping("/preview")
+	public String preview(final Model model) {
+		switchOutput("preview", model);
+		return MODEL_INDEX;
+	}
+
+	private void switchOutput(final String pagekind, final Model model) {
 		model.addAttribute("devmode", devmode);
-		model.addAttribute("pagekind", "program");
-		return "index";
+		model.addAttribute("pagekind", pagekind);
 	}
 
 	@GetMapping("/background.png")

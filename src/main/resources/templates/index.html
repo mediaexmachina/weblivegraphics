@@ -16,30 +16,31 @@
 */-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" />
-        <title>WebLiveGraphics</title>
-        <link
-            rel="stylesheet"
-            type="text/css"
-            th:href="@{https://mexm.media/font-source-sans-pro/font.css}"
-        />
-        <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
-        <style th:inline="text">
-            body {
-                background-image: url("[[@{/background.png}]]");
-            }
-        </style>
-    </head>
 
-    <body>
-        <div id="react"></div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            var pagekind = /*[[${pagekind}]]*/ "default";
-            /*]]>*/
-        </script>
-        <script th:if="${devmode}" src="bundle.js"></script>
-        <script th:unless="${devmode}" src="bundle-prod.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>WebLiveGraphics :: Media ex Machina</title>
+    <link rel="stylesheet" type="text/css" th:href="@{https://mexm.media/font-source-sans-pro/font.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://mexm.media/a-propos/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://mexm.media/a-propos/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://mexm.media/a-propos/favicon-16x16.png">
+    <style th:inline="text">
+        body {
+            background-image: url("[[@{/background.png}]]");
+        }
+    </style>
+</head>
+
+<body>
+    <div id="react"></div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var pagekind = /*[[${pagekind}]]*/ "default";
+        /*]]>*/
+    </script>
+    <script th:if="${devmode}" src="bundle.js"></script>
+    <script th:unless="${devmode}" src="bundle-prod.js"></script>
+</body>
+
 </html>

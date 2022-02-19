@@ -31,6 +31,8 @@ import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -70,16 +72,17 @@ class OnAirPageTest {
 		        .andExpect(model().attribute("devmode", devmode));
 	}
 
-	@Test
-	void testProgram() throws Exception {
-		mvc.perform(get("/program")
+	@ParameterizedTest
+	@ValueSource(strings = { "program", "clean", "preview" })
+	void testScreenOutputs(final String pagekind) throws Exception {
+		mvc.perform(get("/" + pagekind)
 		        .accept(TEXT_HTML))
 		        .andExpect(statusOk)
 		        .andExpect(contentTypeHtmlUtf8)
 		        .andExpect(modelHasNoErrors)
 		        .andExpect(view().name("index"))
 		        .andExpect(model().attribute("devmode", devmode))
-		        .andExpect(model().attribute("pagekind", "program"));
+		        .andExpect(model().attribute("pagekind", pagekind));
 	}
 
 	@Test

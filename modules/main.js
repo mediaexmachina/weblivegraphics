@@ -19,6 +19,7 @@
 import React, { Component } from "react";
 import { StompClient } from "./StompClient";
 import { OutputLayers } from "./OutputLayers";
+import { BasePage } from "./BasePage";
 
 export class Main extends Component {
     constructor(props) {
@@ -36,12 +37,18 @@ export class Main extends Component {
         if (typeof lastLayers == "undefined") {
             return <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />;
         }
+        let mainPage = null;
+        if (pagekind != null) {
+            mainPage = <OutputLayers lastLayers={lastLayers} />;
+        } else {
+            mainPage = <BasePage />;
+        }
 
         return (
             <div>
-                <OutputLayers lastLayers={lastLayers} />
+                {mainPage}
                 <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
             </div>
         );
-}
+    }
 }
