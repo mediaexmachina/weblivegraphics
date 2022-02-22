@@ -17,31 +17,12 @@
 package media.mexm.weblivegraphics.dto;
 
 import java.util.List;
-import java.util.UUID;
 
-public class GraphicKeyerDto {
+public class GraphicKeyerDto extends IdLabelTrait {
 
-	private UUID id;
-	private String label;
 	private boolean activeProgram;
 	private boolean activePreview;
 	private List<GraphicItemDto> items;
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(final UUID id) {
-		this.id = id;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(final String label) {
-		this.label = label;
-	}
 
 	public List<GraphicItemDto> getItems() {
 		return items;

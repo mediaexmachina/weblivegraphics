@@ -16,36 +16,27 @@
  */
 package media.mexm.weblivegraphics.dto;
 
-import java.util.Map;
+import java.util.UUID;
 
-public class GraphicItemDto extends IdLabelTrait {
+public abstract class IdLabelTrait {
 
-	private boolean active;
-	private String typeName;
-	private Map<String, ?> setup;
+	private UUID id;
+	private String label;
 
-	public boolean isActive() {
-		return active;
+	public UUID getId() {
+		return id;
 	}
 
-	public void setActive(final boolean active) {
-		this.active = active;
+	public void setId(final UUID id) {
+		this.id = id;
 	}
 
-	public String getTypeName() {
-		return typeName;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setTypeName(final String typeName) {
-		this.typeName = typeName;
-	}
-
-	public Map<String, ?> getSetup() {// NOSONAR S1452
-		return setup;
-	}
-
-	public void setSetup(final Map<String, ?> setup) {
-		this.setup = setup;
+	public void setLabel(final String label) {
+		this.label = label;
 	}
 
 }

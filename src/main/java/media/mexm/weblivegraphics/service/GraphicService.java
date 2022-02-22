@@ -31,15 +31,27 @@ public interface GraphicService {
 
 	GraphicKeyerDto addKeyer(String label);
 
+	GraphicKeyerDto getDSK();
+
 	GraphicItemDto addItem(UUID keyer, String label, String typeName, boolean active);
 
-	void setActiveItem(final UUID item, final boolean active);
+	GraphicItemDto setActiveItem(final UUID item, final boolean active);
 
 	void setActiveProgramKeyer(final UUID keyer, final boolean active);
 
 	void setActivePreviewKeyer(final UUID keyer, final boolean active);
 
-	void setItemSetup(final UUID item, final Map<String, Object> setup);
+	GraphicItemDto setItemSetup(final UUID item, final Map<String, ?> setup);
 
 	void refresh();
+
+	void setLabel(UUID uuid, String label);
+
+	GraphicKeyerDto getKeyerByLabel(String label);
+
+	void delete(UUID id);
+
+	void moveItemInKeyer(UUID id, GraphicKeyerDto keyer);
+
+	void moveKeyer(UUID id, int newPos);
 }
