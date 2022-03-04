@@ -22,7 +22,8 @@
         "watch": "node_modules/.bin/webpack",
         "install": "node_modules/.bin/webpack --config webpack.config.prod.js",
         "back": "mvn spring-boot:run -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN -DskipTests -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -Dspring-boot.run.noverify=true -Dspring-boot.run.jvmArguments=\"-Dlogging.config=config-dev/log4j2.xml\" -Dspring-boot.run.arguments=\"--spring.config.location=config-dev/application.yml\"",
-        "format": "node_modules/.bin/prettier -w ."
+        "format": "node_modules/.bin/prettier -w .",
+        "apidoc": "mvn spring-boot:run -Dserver.port=0 -Dspring-boot.run.noverify=true -Dspring-boot.run.arguments=\"--spring.config.location=config-dev/application.yml --selfautorestdoc.baseProjectURL=https://github.com/mediaexmachina/weblivegraphics/blob/master export-rest-doc-api\""
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",
