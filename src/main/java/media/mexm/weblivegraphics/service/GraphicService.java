@@ -43,8 +43,6 @@ public interface GraphicService {
 
 	GraphicItemDto setItemSetup(final UUID item, final Map<String, ?> setup);
 
-	void refresh();
-
 	void setLabel(UUID uuid, String label);
 
 	GraphicKeyerDto getKeyerByLabel(String label);

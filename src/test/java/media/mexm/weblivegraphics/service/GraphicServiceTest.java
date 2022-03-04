@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 import java.util.HashMap;
@@ -36,7 +37,6 @@ import org.mockito.Mockito;
 import org.mockito.internal.util.MockUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.github.javafaker.Faker;
@@ -46,7 +46,7 @@ import media.mexm.weblivegraphics.dto.GraphicKeyerDto;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @SpringBootTest
-@ActiveProfiles({ "StompMock" })
+@ActiveProfiles({ "StompServiceMock" })
 class GraphicServiceTest {
 
 	private static final Faker faker = Faker.instance();
@@ -56,7 +56,7 @@ class GraphicServiceTest {
 	@Autowired
 	OutputLayersDto layers;
 	@Autowired
-	SimpMessagingTemplate simpMessagingTemplate;
+	StompService stompService;
 
 	String keyerLabel;
 	String itemLabel;
@@ -72,8 +72,8 @@ class GraphicServiceTest {
 		itemLabel = faker.name().fullName();
 		typeName = faker.company().name();
 
-		assertTrue(MockUtil.isMock(simpMessagingTemplate));
-		Mockito.reset(simpMessagingTemplate);
+		assertTrue(MockUtil.isMock(stompService));
+		Mockito.reset(stompService);
 	}
 
 	@AfterEach
@@ -82,12 +82,11 @@ class GraphicServiceTest {
 		layers.setFullBypass(false);
 		layers.setKeyers(null);
 
-		Mockito.verifyNoMoreInteractions(simpMessagingTemplate);
+		Mockito.verifyNoMoreInteractions(stompService);
 	}
 
 	void checkIsRefresh(final int count) {
-		Mockito.verify(simpMessagingTemplate, times(count))
-		        .convertAndSend("/topic/layers", layers);
+		verify(stompService, times(count)).sendLayersToFront();
 	}
 
 	@Test
@@ -281,12 +280,6 @@ class GraphicServiceTest {
 
 		assertEquals(json, addedItem.getSetup());
 		checkIsRefresh(3);
-	}
-
-	@Test
-	void testRefresh() {
-		graphicService.refresh();
-		checkIsRefresh(1);
 	}
 
 	@Test

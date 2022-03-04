@@ -29,7 +29,6 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import media.mexm.weblivegraphics.dto.GraphicItemDto;
@@ -42,9 +41,9 @@ public class GraphicServiceImpl implements GraphicService {
 	private static final String CAN_T_FOUND_KEYER_WITH_UUID = "Can't found keyer with uuid \"";
 
 	@Autowired
-	private OutputLayersDto layers;
+	private StompService stompService;
 	@Autowired
-	private SimpMessagingTemplate template;
+	private OutputLayersDto layers;
 
 	@Override
 	public OutputLayersDto getLayers() {
@@ -56,7 +55,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (layers.isFullBypass() != bypass) {
 			log.info("Set full bypass: {}", bypass);
 			layers.setFullBypass(bypass);
-			refresh();
+			stompService.sendLayersToFront();
 		}
 	}
 
@@ -73,7 +72,7 @@ public class GraphicServiceImpl implements GraphicService {
 			layers.setKeyers(List.of(keyer));
 		}
 		log.info("Add keyer: {}, {}", label, keyer.getId());
-		refresh();
+		stompService.sendLayersToFront();
 		return keyer;
 	}
 
@@ -116,7 +115,7 @@ public class GraphicServiceImpl implements GraphicService {
 
 		log.info("Add {} Item: {} {} (on keyer {}/{}), active: {}",
 		        typeName, label, item.getId(), keyerUUID, keyer.getLabel(), active);
-		refresh();
+		stompService.sendLayersToFront();
 		return item;
 	}
 
@@ -135,7 +134,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (item.isActive() != active) {
 			item.setActive(active);
 			log.info("Set active item: {}, {}, {}", itemUUID, item.getLabel(), active);
-			refresh();
+			stompService.sendLayersToFront();
 		}
 		return item;
 	}
@@ -147,7 +146,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (keyer.isActiveProgram() != active) {
 			keyer.setActiveProgram(active);
 			log.info("Set active keyer in Program: {}, {}, {}", keyerUUID, keyer.getLabel(), active);
-			refresh();
+			stompService.sendLayersToFront();
 		}
 	}
 
@@ -158,7 +157,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (keyer.isActivePreview() != active) {
 			keyer.setActivePreview(active);
 			log.info("Set active keyer in Preview: {}, {}, {}", keyerUUID, keyer.getLabel(), active);
-			refresh();
+			stompService.sendLayersToFront();
 		}
 	}
 
@@ -177,15 +176,9 @@ public class GraphicServiceImpl implements GraphicService {
 			} else if (log.isInfoEnabled()) {
 				log.info("Set item setup: {}, {}", itemUUID, item.getLabel());
 			}
-			refresh();
+			stompService.sendLayersToFront();
 		}
 		return item;
-	}
-
-	@Override
-	public void refresh() {
-		log.debug("Do refresh layers to clients");
-		template.convertAndSend("/topic/layers", layers);
 	}
 
 	@Override
@@ -195,7 +188,7 @@ public class GraphicServiceImpl implements GraphicService {
 			keyer.setId(UUID.randomUUID());
 			keyer.setLabel("DSK");
 			layers.setDownStreamKeyer(keyer);
-			refresh();
+			stompService.sendLayersToFront();
 		}
 		return layers.getDownStreamKeyer();
 	}
@@ -208,7 +201,7 @@ public class GraphicServiceImpl implements GraphicService {
 		        .findFirst()
 		        .orElseThrow(() -> new IllegalArgumentException(CAN_T_FOUND_KEYER_WITH_UUID + uuid + "\""))
 		        .setLabel(label);
-		refresh();
+		stompService.sendLayersToFront();
 	}
 
 	@Override
@@ -224,7 +217,7 @@ public class GraphicServiceImpl implements GraphicService {
 		final var dsk = Optional.ofNullable(layers.getDownStreamKeyer());
 		if (dsk.isPresent() && uuid.equals(dsk.get().getId())) {
 			layers.setDownStreamKeyer(null);
-			refresh();
+			stompService.sendLayersToFront();
 			return;
 		}
 
@@ -235,7 +228,7 @@ public class GraphicServiceImpl implements GraphicService {
 		        .collect(toUnmodifiableList());
 		if (newKeyerList.size() != actualKeyers.size()) {
 			layers.setKeyers(newKeyerList);
-			refresh();
+			stompService.sendLayersToFront();
 			return;
 		}
 
@@ -250,7 +243,7 @@ public class GraphicServiceImpl implements GraphicService {
 		keyer.setItems(keyer.getItems().stream()
 		        .filter(i -> uuid.equals(i.getId()) == false)
 		        .collect(toUnmodifiableList()));
-		refresh();
+		stompService.sendLayersToFront();
 	}
 
 	@Override
@@ -287,7 +280,7 @@ public class GraphicServiceImpl implements GraphicService {
 			        .collect(toUnmodifiableList()));
 		}
 
-		refresh();
+		stompService.sendLayersToFront();
 	}
 
 	@Override
@@ -320,7 +313,7 @@ public class GraphicServiceImpl implements GraphicService {
 		final var itemToMoveStream = Stream.of(itemToMove);
 		keyer.setItems(Stream.concat(keyerItemsStream, itemToMoveStream).collect(toUnmodifiableList()));
 
-		refresh();
+		stompService.sendLayersToFront();
 	}
 
 }

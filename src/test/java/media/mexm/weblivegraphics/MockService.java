@@ -32,6 +32,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import media.mexm.weblivegraphics.service.GraphicService;
+import media.mexm.weblivegraphics.service.StompService;
 
 public class MockService {
 
@@ -44,6 +45,19 @@ public class MockService {
 		public SimpMessagingTemplate resourceBundleMessageSource() {
 			return Mockito.mock(SimpMessagingTemplate.class);
 		}
+
+	}
+
+	@Configuration
+	@Profile({ "StompServiceMock" })
+	static class StompServiceMock {
+
+		@Bean
+		@Primary
+		public StompService getStompService() {
+			return Mockito.mock(StompService.class);
+		}
+
 	}
 
 	@Configuration
@@ -76,6 +90,18 @@ public class MockService {
 	}
 
 	@SpringBootTest
+	@ActiveProfiles({ "StompServiceMock" })
+	static class TestStompServiceMock {
+		@Autowired
+		StompService stompService;
+
+		@Test
+		void test() {
+			assertTrue(MockUtil.isMock(stompService));
+		}
+	}
+
+	@SpringBootTest
 	@ActiveProfiles({ "GraphicServiceMock" })
 	static class TestGraphicServiceMock {
 		@Autowired
@@ -93,11 +119,14 @@ public class MockService {
 		SimpMessagingTemplate simpMessagingTemplate;
 		@Autowired
 		GraphicService graphicService;
+		@Autowired
+		StompService stompService;
 
 		@Test
 		void test() {
 			assertFalse(MockUtil.isMock(simpMessagingTemplate));
 			assertFalse(MockUtil.isMock(graphicService));
+			assertFalse(MockUtil.isMock(stompService));
 		}
 	}
 
