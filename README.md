@@ -183,6 +183,40 @@ node_modules/.bin/prettier --check .
 
 </details>
 
+## Technical "under the hood"
+
+### Layers
+
+Layers (`OutputLayersDto` class), are the base logic for display blocks.
+The full object is sended to clients pages via STOMP, on each edits.
+It doesn't contain data informations, only declarations for the front.
+It doesn't contain template or style either.
+Data informations can be sended by Stomp, but via another/separate topic, and it's not cover by Layer logic.
+
+The layers can contain one or many layers (`GraphicKeyerDto` classes), and a layer contain some items (`GraphicItemDto` classes).
+
+Only items are displayable/visible, but must be organized on layers.
+
+<img src="doc/layer_logic.png" />
+
+Front role updates its internal React states on each Stomp messages with a new Layers definition.
+
+A "special" layer, is called "DSK", for "Down Stream Keyer", a broadcast television term. It's the last Keyer to be put on the image before output.
+DSK is always on the top of the image _and_ can't never be displayed on clean channel.
+Use it for display texts or information should not be recorded, like a clock.
+
+3 channels can be made:
+
+|                          | Program channel (PGM)  | Preview channel (PVW)  | Clean channel (CLN)    |
+|--------------------------|------------------------|------------------------|------------------------|
+| Can display DSK ?        | Yes, only if activated | Yes, only if activated | Never display          |
+| Can display keyers ?     | Yes, only if activated | Yes, only if activated | Yes, follow PGM |
+| Can display background ? | Always                 | Always                 | Always                 |
+
+Each layer can be visible independently on Program and/or Preview channel.
+
+A RESTfull API can operate on layers (see [API.md](API.md)).
+
 ## Contribution
 
 Pull requests are welcome.
