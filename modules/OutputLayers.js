@@ -32,16 +32,20 @@ export class OutputLayers extends Component {
 
         const fullBypass = lastLayers.fullBypass;
         const downStreamKeyer = lastLayers.downStreamKeyer;
-        const allKeyers = lastLayers.keyers
-            .slice()
-            .reverse()
-            .filter(
-                (k) =>
-                    (k.activeProgram &&
-                        (pagekind == "program" || pagekind == "clean")) ||
-                    (k.activePreview && pagekind == "preview")
-            )
-            .map((k) => <GraphicKeyer key={k.id} keyer={k} />);
+
+        let allKeyers = [];
+        if (lastLayers.keyers != null) {
+            allKeyers = lastLayers.keyers
+                .slice()
+                .reverse()
+                .filter(
+                    (k) =>
+                        (k.activeProgram &&
+                            (pagekind == "program" || pagekind == "clean")) ||
+                        (k.activePreview && pagekind == "preview")
+                )
+                .map((k) => <GraphicKeyer key={k.id} keyer={k} />);
+        }
 
         if (downStreamKeyer != null && pagekind != "clean") {
             allKeyers.push(

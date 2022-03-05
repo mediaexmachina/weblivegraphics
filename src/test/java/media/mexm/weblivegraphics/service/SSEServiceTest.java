@@ -16,9 +16,11 @@
  */
 package media.mexm.weblivegraphics.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 import org.junit.jupiter.api.AfterEach;
@@ -28,39 +30,49 @@ import org.mockito.Mockito;
 import org.mockito.internal.util.MockUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import media.mexm.weblivegraphics.SseEmitterPool;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @SpringBootTest
-@ActiveProfiles({ "StompMock" })
-class StompServiceTest {
+@ActiveProfiles({ "SSEMock" })
+class SSEServiceTest {
 
 	@Autowired
-	StompService stompService;
+	SSEService sseService;
 	@Autowired
-	SimpMessagingTemplate simpMessagingTemplate;
+	SseEmitterPool sseEmitterPool;
 	@Autowired
 	OutputLayersDto layers;
 
 	@BeforeEach
 	void init() {
-		assertTrue(MockUtil.isMock(simpMessagingTemplate));
-		Mockito.reset(simpMessagingTemplate);
+		assertTrue(MockUtil.isMock(sseEmitterPool));
+		Mockito.reset(sseEmitterPool);
 	}
 
 	@AfterEach
 	void ends() {
-		verifyNoMoreInteractions(simpMessagingTemplate);
+		verifyNoMoreInteractions(sseEmitterPool);
 	}
 
 	@Test
 	void testSendLayersToFront() {
-		stompService.sendLayersToFront();
+		sseService.sendLayersToFront();
+		verify(sseEmitterPool, times(1)).send(layers);
+	}
 
-		verify(simpMessagingTemplate, times(1))
-		        .convertAndSend("/topic/layers", layers);
+	@Test
+	void testCreateFrontSSE() {
+		final var emitter = Mockito.mock(SseEmitter.class);
+		when(sseEmitterPool.create()).thenReturn(emitter);
+
+		final var emitterReturn = sseService.createFrontSSE();
+
+		assertEquals(emitter, emitterReturn);
+		verify(sseEmitterPool, times(1)).create();
 	}
 
 }

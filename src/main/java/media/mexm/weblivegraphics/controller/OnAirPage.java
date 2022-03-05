@@ -29,11 +29,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import media.mexm.weblivegraphics.AppConf;
+import media.mexm.weblivegraphics.service.SSEService;
 
 @Controller
 public class OnAirPage {
+
+	@Autowired
+	private SSEService sseService;
 
 	private static final String MODEL_INDEX = "index";
 
@@ -80,6 +85,11 @@ public class OnAirPage {
 		        .contentType(IMAGE_PNG)
 		        .contentLength(file.length())
 		        .body(resource);
+	}
+
+	@GetMapping(value = "/sse")
+	public SseEmitter getSSELayers() {
+		return sseService.createFrontSSE();
 	}
 
 }

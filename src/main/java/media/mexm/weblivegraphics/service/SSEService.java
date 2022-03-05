@@ -11,24 +11,17 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
- * Copyright (C) Media ex Machina 2021
+ * Copyright (C) Media ex Machina 2022
  *
  */
-"use strict";
+package media.mexm.weblivegraphics.service;
 
-import css from "../../../modules/app.scss"; //NOSONAR S1128
-import { Component } from "react";
-import { render as _render } from "react-dom";
-import { Main } from "../../../modules/main";
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-    }
+public interface SSEService {
 
-    render() {
-        return <Main />;
-    }
+	void sendLayersToFront();
+
+	SseEmitter createFrontSSE();
+
 }
-
-_render(<App />, document.getElementById("react"));

@@ -18,19 +18,27 @@ package media.mexm.weblivegraphics;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @Configuration
 @ComponentScan(basePackages = { "tv.hd3g.selfautorestdoc.mod" })
 public class Setup {
+
+	@Value("${weblivegraphics.sseTimeout:300s}")
+	private Duration redirectTTL;
 
 	@Bean
 	public MessageSource messageSource() {
@@ -47,4 +55,11 @@ public class Setup {
 		return new OutputLayersDto();
 	}
 
+	@Bean
+	public SseEmitterPool getSseEmitterPool() {
+		return new SseEmitterPool(
+		        () -> new SseEmitter(redirectTTL.toMillis()),
+		        new ObjectMapper(),
+		        SseEmitter::event);
+	}
 }

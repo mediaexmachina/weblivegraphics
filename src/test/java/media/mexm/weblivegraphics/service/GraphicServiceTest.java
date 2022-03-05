@@ -41,12 +41,13 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.github.javafaker.Faker;
 
+import media.mexm.weblivegraphics.SseEmitterPool;
 import media.mexm.weblivegraphics.dto.GraphicItemDto;
 import media.mexm.weblivegraphics.dto.GraphicKeyerDto;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @SpringBootTest
-@ActiveProfiles({ "StompServiceMock" })
+@ActiveProfiles({ "SSEMock" })
 class GraphicServiceTest {
 
 	private static final Faker faker = Faker.instance();
@@ -56,7 +57,7 @@ class GraphicServiceTest {
 	@Autowired
 	OutputLayersDto layers;
 	@Autowired
-	StompService stompService;
+	SseEmitterPool sseEmitterPool;
 
 	String keyerLabel;
 	String itemLabel;
@@ -72,8 +73,8 @@ class GraphicServiceTest {
 		itemLabel = faker.name().fullName();
 		typeName = faker.company().name();
 
-		assertTrue(MockUtil.isMock(stompService));
-		Mockito.reset(stompService);
+		assertTrue(MockUtil.isMock(sseEmitterPool));
+		Mockito.reset(sseEmitterPool);
 	}
 
 	@AfterEach
@@ -82,11 +83,11 @@ class GraphicServiceTest {
 		layers.setFullBypass(false);
 		layers.setKeyers(null);
 
-		Mockito.verifyNoMoreInteractions(stompService);
+		Mockito.verifyNoMoreInteractions(sseEmitterPool);
 	}
 
 	void checkIsRefresh(final int count) {
-		verify(stompService, times(count)).sendLayersToFront();
+		verify(sseEmitterPool, times(count)).send(layers);
 	}
 
 	@Test

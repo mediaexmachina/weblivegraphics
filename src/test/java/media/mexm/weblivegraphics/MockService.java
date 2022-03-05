@@ -28,34 +28,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import media.mexm.weblivegraphics.service.GraphicService;
-import media.mexm.weblivegraphics.service.StompService;
+import media.mexm.weblivegraphics.service.SSEService;
 
 public class MockService {
 
 	@Configuration
-	@Profile({ "StompMock" })
-	static class StompMock {
+	@Profile({ "SSEMock" })
+	static class SseEmitterPoolMock {
 
 		@Bean
 		@Primary
-		public SimpMessagingTemplate resourceBundleMessageSource() {
-			return Mockito.mock(SimpMessagingTemplate.class);
-		}
-
-	}
-
-	@Configuration
-	@Profile({ "StompServiceMock" })
-	static class StompServiceMock {
-
-		@Bean
-		@Primary
-		public StompService getStompService() {
-			return Mockito.mock(StompService.class);
+		public SseEmitterPool getSseEmitterPoolMock() {
+			return Mockito.mock(SseEmitterPool.class);
 		}
 
 	}
@@ -78,26 +65,14 @@ public class MockService {
 	 */
 
 	@SpringBootTest
-	@ActiveProfiles({ "StompMock" })
-	static class TestStompMock {
+	@ActiveProfiles({ "SSEMock" })
+	static class TestSseEmitterPoolMock {
 		@Autowired
-		SimpMessagingTemplate simpMessagingTemplate;
+		SseEmitterPool sseEmitterPool;
 
 		@Test
 		void test() {
-			assertTrue(MockUtil.isMock(simpMessagingTemplate));
-		}
-	}
-
-	@SpringBootTest
-	@ActiveProfiles({ "StompServiceMock" })
-	static class TestStompServiceMock {
-		@Autowired
-		StompService stompService;
-
-		@Test
-		void test() {
-			assertTrue(MockUtil.isMock(stompService));
+			assertTrue(MockUtil.isMock(sseEmitterPool));
 		}
 	}
 
@@ -116,17 +91,17 @@ public class MockService {
 	@SpringBootTest
 	static class TestNotMock {
 		@Autowired
-		SimpMessagingTemplate simpMessagingTemplate;
+		SseEmitterPool sseEmitterPool;
 		@Autowired
 		GraphicService graphicService;
 		@Autowired
-		StompService stompService;
+		SSEService sSEService;
 
 		@Test
 		void test() {
-			assertFalse(MockUtil.isMock(simpMessagingTemplate));
+			assertFalse(MockUtil.isMock(sseEmitterPool));
 			assertFalse(MockUtil.isMock(graphicService));
-			assertFalse(MockUtil.isMock(stompService));
+			assertFalse(MockUtil.isMock(sSEService));
 		}
 	}
 

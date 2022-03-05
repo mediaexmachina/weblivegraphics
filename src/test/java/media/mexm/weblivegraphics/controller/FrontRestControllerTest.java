@@ -31,16 +31,16 @@ import org.mockito.internal.util.MockUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import media.mexm.weblivegraphics.SseEmitterPool;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles({ "StompMock" })
+@ActiveProfiles({ "SSEMock" })
 class FrontRestControllerTest {
 
 	private final ResultMatcher statusOk = status().isOk();
@@ -50,17 +50,17 @@ class FrontRestControllerTest {
 	@Autowired
 	OutputLayersDto layers;
 	@Autowired
-	SimpMessagingTemplate simpMessagingTemplate;
+	SseEmitterPool sseEmitterPool;
 
 	@BeforeEach
 	void init() {
-		assertTrue(MockUtil.isMock(simpMessagingTemplate));
-		Mockito.reset(simpMessagingTemplate);
+		assertTrue(MockUtil.isMock(sseEmitterPool));
+		Mockito.reset(sseEmitterPool);
 	}
 
 	@AfterEach
 	void ends() {
-		Mockito.verifyNoMoreInteractions(simpMessagingTemplate);
+		Mockito.verifyNoMoreInteractions(sseEmitterPool);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ class FrontRestControllerTest {
 		mvc.perform(get("/v1/weblivegraphics/front/refresh-layers")
 		        .accept(APPLICATION_JSON))
 		        .andExpect(statusOk);
-		verify(simpMessagingTemplate, times(1))
-		        .convertAndSend("/topic/layers", layers);
+		verify(sseEmitterPool, times(1)).send(layers);
 	}
+
 }

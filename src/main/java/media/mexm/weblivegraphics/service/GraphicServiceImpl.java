@@ -41,7 +41,7 @@ public class GraphicServiceImpl implements GraphicService {
 	private static final String CAN_T_FOUND_KEYER_WITH_UUID = "Can't found keyer with uuid \"";
 
 	@Autowired
-	private StompService stompService;
+	private SSEService sSEService;
 	@Autowired
 	private OutputLayersDto layers;
 
@@ -55,7 +55,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (layers.isFullBypass() != bypass) {
 			log.info("Set full bypass: {}", bypass);
 			layers.setFullBypass(bypass);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 		}
 	}
 
@@ -72,7 +72,7 @@ public class GraphicServiceImpl implements GraphicService {
 			layers.setKeyers(List.of(keyer));
 		}
 		log.info("Add keyer: {}, {}", label, keyer.getId());
-		stompService.sendLayersToFront();
+		sSEService.sendLayersToFront();
 		return keyer;
 	}
 
@@ -115,7 +115,7 @@ public class GraphicServiceImpl implements GraphicService {
 
 		log.info("Add {} Item: {} {} (on keyer {}/{}), active: {}",
 		        typeName, label, item.getId(), keyerUUID, keyer.getLabel(), active);
-		stompService.sendLayersToFront();
+		sSEService.sendLayersToFront();
 		return item;
 	}
 
@@ -134,7 +134,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (item.isActive() != active) {
 			item.setActive(active);
 			log.info("Set active item: {}, {}, {}", itemUUID, item.getLabel(), active);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 		}
 		return item;
 	}
@@ -146,7 +146,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (keyer.isActiveProgram() != active) {
 			keyer.setActiveProgram(active);
 			log.info("Set active keyer in Program: {}, {}, {}", keyerUUID, keyer.getLabel(), active);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 		}
 	}
 
@@ -157,7 +157,7 @@ public class GraphicServiceImpl implements GraphicService {
 		if (keyer.isActivePreview() != active) {
 			keyer.setActivePreview(active);
 			log.info("Set active keyer in Preview: {}, {}, {}", keyerUUID, keyer.getLabel(), active);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 		}
 	}
 
@@ -176,7 +176,7 @@ public class GraphicServiceImpl implements GraphicService {
 			} else if (log.isInfoEnabled()) {
 				log.info("Set item setup: {}, {}", itemUUID, item.getLabel());
 			}
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 		}
 		return item;
 	}
@@ -188,7 +188,7 @@ public class GraphicServiceImpl implements GraphicService {
 			keyer.setId(UUID.randomUUID());
 			keyer.setLabel("DSK");
 			layers.setDownStreamKeyer(keyer);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 		}
 		return layers.getDownStreamKeyer();
 	}
@@ -201,7 +201,7 @@ public class GraphicServiceImpl implements GraphicService {
 		        .findFirst()
 		        .orElseThrow(() -> new IllegalArgumentException(CAN_T_FOUND_KEYER_WITH_UUID + uuid + "\""))
 		        .setLabel(label);
-		stompService.sendLayersToFront();
+		sSEService.sendLayersToFront();
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class GraphicServiceImpl implements GraphicService {
 		final var dsk = Optional.ofNullable(layers.getDownStreamKeyer());
 		if (dsk.isPresent() && uuid.equals(dsk.get().getId())) {
 			layers.setDownStreamKeyer(null);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 			return;
 		}
 
@@ -228,7 +228,7 @@ public class GraphicServiceImpl implements GraphicService {
 		        .collect(toUnmodifiableList());
 		if (newKeyerList.size() != actualKeyers.size()) {
 			layers.setKeyers(newKeyerList);
-			stompService.sendLayersToFront();
+			sSEService.sendLayersToFront();
 			return;
 		}
 
@@ -243,7 +243,7 @@ public class GraphicServiceImpl implements GraphicService {
 		keyer.setItems(keyer.getItems().stream()
 		        .filter(i -> uuid.equals(i.getId()) == false)
 		        .collect(toUnmodifiableList()));
-		stompService.sendLayersToFront();
+		sSEService.sendLayersToFront();
 	}
 
 	@Override
@@ -280,7 +280,7 @@ public class GraphicServiceImpl implements GraphicService {
 			        .collect(toUnmodifiableList()));
 		}
 
-		stompService.sendLayersToFront();
+		sSEService.sendLayersToFront();
 	}
 
 	@Override
@@ -313,7 +313,7 @@ public class GraphicServiceImpl implements GraphicService {
 		final var itemToMoveStream = Stream.of(itemToMove);
 		keyer.setItems(Stream.concat(keyerItemsStream, itemToMoveStream).collect(toUnmodifiableList()));
 
-		stompService.sendLayersToFront();
+		sSEService.sendLayersToFront();
 	}
 
 }

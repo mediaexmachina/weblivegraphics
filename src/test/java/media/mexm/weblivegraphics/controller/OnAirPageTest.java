@@ -18,6 +18,9 @@ package media.mexm.weblivegraphics.controller;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.http.MediaType.IMAGE_PNG;
 import static org.springframework.http.MediaType.TEXT_HTML;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -33,18 +36,23 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import media.mexm.weblivegraphics.AppConf;
+import media.mexm.weblivegraphics.SseEmitterPool;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles({ "SSEMock" })
 class OnAirPageTest {
 
 	private static final MediaType TEXT_HTML_UTF8 = new MediaType("text", "html", UTF_8);
@@ -57,6 +65,8 @@ class OnAirPageTest {
 	private MockMvc mvc;
 	@Autowired
 	private AppConf conf;
+	@Autowired
+	private SseEmitterPool sseEmitterPool;
 
 	@Value("${js.devmode:false}")
 	private boolean devmode;
@@ -96,4 +106,16 @@ class OnAirPageTest {
 		final var pngFile = FileUtils.readFileToByteArray(new File(conf.getBaseBackgroundFile()));
 		assertTrue(Arrays.equals(pngFile, result.getResponse().getContentAsByteArray()));
 	}
+
+	@Test
+	void testGetSSELayers() throws Exception {
+		final var emitter = Mockito.mock(SseEmitter.class);
+		when(sseEmitterPool.create()).thenReturn(emitter);
+
+		mvc.perform(get("/sse"))
+		        .andExpect(statusOk);
+
+		verify(sseEmitterPool, times(1)).create();
+	}
+
 }

@@ -25,18 +25,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import media.mexm.weblivegraphics.service.StompService;
+import media.mexm.weblivegraphics.service.SSEService;
 
 @RestController
 @RequestMapping(value = "/v1/weblivegraphics/front", produces = APPLICATION_JSON_VALUE)
 public class FrontRestController {
 
 	@Autowired
-	private StompService stompService;
+	private SSEService sseService;
 
 	@GetMapping(value = "refresh-layers")
 	public ResponseEntity<Object> getLayers() {
-		stompService.sendLayersToFront();
+		sseService.sendLayersToFront();
 		return new ResponseEntity<>(OK);
 	}
 

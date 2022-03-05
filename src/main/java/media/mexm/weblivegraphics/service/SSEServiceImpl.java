@@ -19,23 +19,30 @@ package media.mexm.weblivegraphics.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import media.mexm.weblivegraphics.SseEmitterPool;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @Service
-public class StompServiceImpl implements StompService {
+public class SSEServiceImpl implements SSEService {
 	private static final Logger log = LogManager.getLogger();
 
 	@Autowired
-	private SimpMessagingTemplate template;
-	@Autowired
 	private OutputLayersDto layers;
+	@Autowired
+	private SseEmitterPool sseEmitterPool;
 
 	@Override
 	public void sendLayersToFront() {
 		log.debug("Do refresh layers to clients");
-		template.convertAndSend("/topic/layers", layers);
+		sseEmitterPool.send(layers);
 	}
+
+	@Override
+	public SseEmitter createFrontSSE() {
+		return sseEmitterPool.create();
+	}
+
 }

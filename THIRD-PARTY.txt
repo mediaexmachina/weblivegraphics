@@ -1,5 +1,5 @@
 
-Lists of 104 third-party dependencies.
+Lists of 101 third-party dependencies.
      (Apache License, Version 2.0) ClassMate (com.fasterxml:classmate:1.5.1 - https://github.com/FasterXML/java-classmate)
      (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.13.0 - http://github.com/FasterXML/jackson)
      (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.13.0 - https://github.com/FasterXML/jackson-core)
@@ -73,11 +73,9 @@ Lists of 104 third-party dependencies.
      (Apache License, Version 2.0) Spring Core (org.springframework:spring-core:5.3.13 - https://github.com/spring-projects/spring-framework)
      (Apache License, Version 2.0) Spring Expression Language (SpEL) (org.springframework:spring-expression:5.3.13 - https://github.com/spring-projects/spring-framework)
      (Apache License, Version 2.0) Spring Commons Logging Bridge (org.springframework:spring-jcl:5.3.13 - https://github.com/spring-projects/spring-framework)
-     (Apache License, Version 2.0) Spring Messaging (org.springframework:spring-messaging:5.3.13 - https://github.com/spring-projects/spring-framework)
      (Apache License, Version 2.0) Spring TestContext Framework (org.springframework:spring-test:5.3.13 - https://github.com/spring-projects/spring-framework)
      (Apache License, Version 2.0) Spring Web (org.springframework:spring-web:5.3.13 - https://github.com/spring-projects/spring-framework)
      (Apache License, Version 2.0) Spring Web MVC (org.springframework:spring-webmvc:5.3.13 - https://github.com/spring-projects/spring-framework)
-     (Apache License, Version 2.0) Spring WebSocket (org.springframework:spring-websocket:5.3.13 - https://github.com/spring-projects/spring-framework)
      (Apache License, Version 2.0) spring-boot (org.springframework.boot:spring-boot:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) spring-boot-autoconfigure (org.springframework.boot:spring-boot-autoconfigure:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) spring-boot-configuration-processor (org.springframework.boot:spring-boot-configuration-processor:2.6.1 - https://spring.io/projects/spring-boot)
@@ -89,7 +87,6 @@ Lists of 104 third-party dependencies.
      (Apache License, Version 2.0) spring-boot-starter-tomcat (org.springframework.boot:spring-boot-starter-tomcat:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) spring-boot-starter-validation (org.springframework.boot:spring-boot-starter-validation:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) spring-boot-starter-web (org.springframework.boot:spring-boot-starter-web:2.6.1 - https://spring.io/projects/spring-boot)
-     (Apache License, Version 2.0) spring-boot-starter-websocket (org.springframework.boot:spring-boot-starter-websocket:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) spring-boot-test (org.springframework.boot:spring-boot-test:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) spring-boot-test-autoconfigure (org.springframework.boot:spring-boot-test-autoconfigure:2.6.1 - https://spring.io/projects/spring-boot)
      (Apache License, Version 2.0) Spring HATEOAS (org.springframework.hateoas:spring-hateoas:1.4.0 - https://github.com/spring-projects/spring-hateoas)
@@ -101,6 +98,6 @@ Lists of 104 third-party dependencies.
      (The Apache Software License, Version 2.0) org.xmlunit:xmlunit-core (org.xmlunit:xmlunit-core:2.8.3 - https://www.xmlunit.org/)
      (Apache License, Version 2.0) SnakeYAML (org.yaml:snakeyaml:1.23 - http://www.snakeyaml.org)
      (Apache License, Version 2.0) SnakeYAML (org.yaml:snakeyaml:1.29 - http://www.snakeyaml.org)
-     (GNU Lesser General Public License, Version 3) SelfAutoRESTDoc (tv.hd3g:selfautorestdoc:0.2.4-SNAPSHOT - https://github.com/hdsdi3g/selfautorestdoc)
+     (GNU Lesser General Public License, Version 3) SelfAutoRESTDoc (tv.hd3g:selfautorestdoc:0.3.0 - https://github.com/hdsdi3g/selfautorestdoc)
      (GNU Lesser General Public License, Version 3) CodePolicyValidation (tv.hd3g.commons:codepolicyvalidation:1.0.2 - https://github.com/hdsdi3g/codepolicyvalidation)
      (GNU Lesser General Public License, Version 3) Commons Interfaces (tv.hd3g.commons:interfaces:7.0.0 - https://github.com/hdsdi3g/mvn-starter)

@@ -11,32 +11,34 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
- * Copyright (C) Media ex Machina 2022
+ * Copyright (C) Media ex Machina 2021
  *
  */
 "use strict";
 
 import React, { Component } from "react";
-import { StompClient } from "./StompClient";
+import { render as _render } from "react-dom";
+
+import css from "./app.scss"; //NOSONAR S1128
+import { SSEClient } from "./SSEClient";
 import { OutputLayers } from "./OutputLayers";
 import { BasePage } from "./BasePage";
 
-export class Main extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
-    onLayersUpdate(message) {
-        const lastLayers = JSON.parse(message.body);
-        this.setState({ lastLayers: lastLayers });
+    onLayersUpdate(layers) {
+        this.setState({ lastLayers: layers });
     }
 
     render() {
         const lastLayers = this.state.lastLayers;
         if (typeof lastLayers == "undefined") {
             return (
-                <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
+                <SSEClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
             );
         }
         let mainPage = null;
@@ -48,9 +50,15 @@ export class Main extends Component {
 
         return (
             <div>
-                {mainPage}
-                <StompClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
+                <React.StrictMode>
+                    {mainPage}
+                    <SSEClient
+                        onLayersUpdate={this.onLayersUpdate.bind(this)}
+                    />
+                </React.StrictMode>
             </div>
         );
     }
 }
+
+_render(<App />, document.getElementById("react"));
