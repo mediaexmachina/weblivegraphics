@@ -30,6 +30,10 @@ export class GraphicKeyer extends Component {
             <GraphicItem key={i.id} item={i} />
         ));
 
-        return <div>{allItems}</div>;
+        return (
+            <section className="layer" style={{ zIndex: this.props.zindex }}>
+                {allItems}
+            </section>
+        );
     }
 }

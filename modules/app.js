@@ -21,7 +21,7 @@ import { render as _render } from "react-dom";
 
 import css from "./app.scss"; //NOSONAR S1128
 import { SSEClient } from "./SSEClient";
-import { OutputLayers } from "./OutputLayers";
+import { OutputLayers } from "./layers/OutputLayers";
 import { BasePage } from "./BasePage";
 
 class App extends Component {
@@ -49,14 +49,14 @@ class App extends Component {
         }
 
         return (
-            <div>
+            <>
                 <React.StrictMode>
                     {mainPage}
                     <SSEClient
                         onLayersUpdate={this.onLayersUpdate.bind(this)}
                     />
                 </React.StrictMode>
-            </div>
+            </>
         );
     }
 }

@@ -27,38 +27,32 @@ body {
     padding: 0;
 }
 
-.hidden {
-    visibility: hidden;
-}
-
-div.center-center {
+div.menupage {
     font-size: 120%;
     position: fixed;
     top: 30%;
     left: 30%;
 }
 
-header {
+article.layers * {
+    z-index: inherit;
+}
+
+section.layer div.mainlivetitle {
+    font-size: 2.8vw;
     text-align: center;
     color: white;
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 0.4vw;
+    left: 15vw;
+    right: 7vw;
 }
 
-aside {
-    background-color: burlywood;
+section.imgbackground {
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 10;
+    width: 100vw;
+    height: 51vw;
     position: fixed;
-    top: 2em;
-    right: 2em;
-    margin-left: 1em;
-    margin-right: 1em;
-    border: 1px solid black;
-}
-
-main {
-    font-size: 120%;
-    position: fixed;
-    top: 30%;
-    left: 30%;
 }

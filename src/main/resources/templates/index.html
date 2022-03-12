@@ -25,11 +25,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="https://mexm.media/a-propos/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://mexm.media/a-propos/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://mexm.media/a-propos/favicon-16x16.png">
-    <style th:inline="text">
-        body {
-            background-image: url("[[@{/background.png}]]");
-        }
-    </style>
 </head>
 
 <body>
@@ -37,6 +32,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         var pagekind = /*[[${pagekind}]]*/ "default";
+        var backgroundImageURL = /*[[@{/background.png}]]*/ "";
         /*]]>*/
     </script>
     <script th:if="${devmode}" src="bundle.js"></script>

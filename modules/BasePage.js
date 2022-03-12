@@ -25,7 +25,7 @@ export class BasePage extends Component {
 
     render() {
         return (
-            <main>
+            <div className="menupage">
                 <p>
                     <a href="/program">Switch to program screen</a>
                 </p>
@@ -35,7 +35,7 @@ export class BasePage extends Component {
                 <p>
                     <a href="/preview">Switch to preview screen</a>
                 </p>
-            </main>
+            </div>
         );
     }
 }

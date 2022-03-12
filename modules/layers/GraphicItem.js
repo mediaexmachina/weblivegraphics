@@ -28,11 +28,13 @@ export class GraphicItem extends Component {
         if (item.active == false) {
             return null;
         }
-        /*
-    	private UUID id;
-	    private String label;
-	    private Map<String, Object> setup;
-        */
+        if (item.typeName == "mainlivetitle" && item.setup != null) {
+            return (
+                <div className="mainlivetitle" key={item.id}>
+                    {item.setup.text}
+                </div>
+            );
+        }
         return <div>{item.typeName}</div>;
     }
 }

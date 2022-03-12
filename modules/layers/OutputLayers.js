@@ -30,21 +30,26 @@ export class OutputLayers extends Component {
             return null;
         }
 
-        const fullBypass = lastLayers.fullBypass;
+        const visibility = lastLayers.fullBypass ? "hidden" : "visible";
         const downStreamKeyer = lastLayers.downStreamKeyer;
 
         let allKeyers = [];
         if (lastLayers.keyers != null) {
-            allKeyers = lastLayers.keyers
+            const filteredKeyers = lastLayers.keyers
                 .slice()
-                .reverse()
+                //.reverse()
                 .filter(
                     (k) =>
                         (k.activeProgram &&
                             (pagekind == "program" || pagekind == "clean")) ||
                         (k.activePreview && pagekind == "preview")
-                )
-                .map((k) => <GraphicKeyer key={k.id} keyer={k} />);
+                );
+            for (let i = 0; i < filteredKeyers.length; i++) {
+                const k = filteredKeyers[i];
+                allKeyers.push(
+                    <GraphicKeyer key={k.id} keyer={k} zindex={100 + i} />
+                );
+            }
         }
 
         if (downStreamKeyer != null && pagekind != "clean") {
@@ -52,14 +57,23 @@ export class OutputLayers extends Component {
                 <GraphicKeyer
                     key={downStreamKeyer.id}
                     keyer={downStreamKeyer}
+                    zindex="10000"
                 />
             );
         }
 
         return (
-            <div className={`center-center ${fullBypass ? "hidden" : ""}`}>
-                {allKeyers}
-            </div>
+            <>
+                <article className="layers" style={{ visibility: visibility }}>
+                    {allKeyers}
+                </article>
+                <section
+                    className="imgbackground"
+                    style={{
+                        backgroundImage: "url(" + backgroundImageURL + ")",
+                    }}
+                />
+            </>
         );
     }
 }
