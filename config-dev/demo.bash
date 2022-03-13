@@ -13,3 +13,7 @@ curl -X POST "$BASE_URL_API/layers/keyer/item?keyerLabel=toptitle&itemLabel=TopL
 
 # Put setup for created item
 curl -d '{"text":"My Live Title"}' -X PUT -H "Content-Type: application/json" "$BASE_URL_API/layers/keyer/item/setup?keyerLabel=toptitle&itemLabel=TopLiveTitle"
+
+# Create clock
+curl -X POST "$BASE_URL_API/layers/keyer/item?keyerLabel=toptitle&itemLabel=TopClock&typeName=clock&active=true"
+

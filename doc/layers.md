@@ -33,3 +33,20 @@ weblivegraphics/layers/keyer/item/setup?keyerLabel=toptitle&itemLabel=TopLiveTit
 ```
 
 </details>
+
+## Clock
+
+Kind: static text (static from back ; updated by front).
+
+Type name: `clock`.
+
+Don't need setup.
+
+<details>
+<summary>Create call example</summary>
+
+```bash
+curl -X POST "http://localhost:8080/v1/weblivegraphics/layers/keyer/item?keyerLabel=toptitle&itemLabel=TopClock&typeName=clock&active=true"
+```
+
+</details>

@@ -14,10 +14,14 @@
  * Copyright (C) Media ex Machina 2021
  *
  */
+
+$smallTextFontSize: 1.7vw;
+
 body {
     font-family: "Source Sans Pro", sans-serif;
     font-weight: 200;
     font-size: 2.5vw;
+    color: white;
 
     overflow: hidden;
     background-size: cover;
@@ -41,7 +45,6 @@ article.layers * {
 section.layer div.mainlivetitle {
     font-size: 2.8vw;
     text-align: center;
-    color: white;
     position: fixed;
     top: 0.4vw;
     left: 15vw;
@@ -51,8 +54,17 @@ section.layer div.mainlivetitle {
 section.imgbackground {
     background-size: cover;
     background-repeat: no-repeat;
+    top: 0;
     z-index: 10;
     width: 100vw;
     height: 51vw;
     position: fixed;
+}
+
+section.layer div.clock {
+    font-size: $smallTextFontSize;
+    text-align: center;
+    position: fixed;
+    top: 0.4vw;
+    left: 17.5vw;
 }

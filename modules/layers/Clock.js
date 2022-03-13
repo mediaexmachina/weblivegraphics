@@ -17,27 +17,35 @@
 "use strict";
 
 import React, { Component } from "react";
-import { Clock } from "./Clock";
 
-export class GraphicItem extends Component {
+export class Clock extends Component {
     constructor(props) {
         super(props);
+        this.state = { now: this.computeClock() };
+    }
+
+    componentDidMount() {
+        const intervalRef = window.setInterval(
+            this.onTimeClock.bind(this),
+            1000
+        );
+        this.setState({ intervalRef: intervalRef });
+    }
+
+    computeClock() {
+        const options = { hour: "2-digit", minute: "2-digit" };
+        return new Date().toLocaleTimeString(undefined, options);
+    }
+
+    onTimeClock() {
+        this.setState({ now: this.computeClock() });
+    }
+
+    componentWillUnmount() {
+        window.clearInterval(this.state.intervalRef);
     }
 
     render() {
-        const item = this.props.item;
-        if (item.active == false) {
-            return null;
-        }
-        if (item.typeName == "mainlivetitle" && item.setup != null) {
-            return (
-                <div className="mainlivetitle" key={item.id}>
-                    {item.setup.text}
-                </div>
-            );
-        } else if (item.typeName == "clock") {
-            return <Clock key={item.id} />;
-        }
-        return <div>{item.typeName}</div>;
+        return <div className="clock">{this.state.now}</div>;
     }
 }
