@@ -24,12 +24,6 @@ Expected setup:
 <summary>Create calls example</summary>
 
 ```bash
-# Create keyer
-curl -X POST "http://localhost:8080/v1/weblivegraphics/layers/keyer?label=toptitle"
-
-# Active it on program
-curl -X PUT "http://localhost:8080/v1/weblivegraphics/layers/keyer/pgm?label=toptitle&active=true"
-
 # Create item
 curl -X POST "http://localhost:8080/v1/weblivegraphics/layers/keyer/item?keyerLabel=toptitle&itemLabel=TopLiveTitle&typeName=mainlivetitle&active=true"
 
