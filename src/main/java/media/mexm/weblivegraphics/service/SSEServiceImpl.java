@@ -16,6 +16,8 @@
  */
 package media.mexm.weblivegraphics.service;
 
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class SSEServiceImpl implements SSEService {
 	@Autowired
 	private OutputLayersDto layers;
 	@Autowired
+	private DynamicalSummaryService dynamicalSummaryService;
+	@Autowired
 	private SseEmitterPool sseEmitterPool;
 
 	@Override
@@ -43,6 +47,30 @@ public class SSEServiceImpl implements SSEService {
 	@Override
 	public SseEmitter createFrontSSE() {
 		return sseEmitterPool.create();
+	}
+
+	@Override
+	public void displayCurrentChapterCard() {
+		Optional.ofNullable(dynamicalSummaryService.getActiveSummary())
+		        .map(dynamicalSummaryService::getActiveChapter)
+		        .ifPresent(sseEmitterPool::sendDynamicalSummaryChapter);
+	}
+
+	@Override
+	public void displaySummary() {
+		Optional.ofNullable(dynamicalSummaryService.getActiveSummary())
+		        .map(dynamicalSummaryService::getChapters)
+		        .ifPresent(sseEmitterPool::sendDynamicalSummary);
+	}
+
+	@Override
+	public void hideCurrentChapterCard() {
+		sseEmitterPool.sendDynamicalSummaryChapter(null);
+	}
+
+	@Override
+	public void hideSummary() {
+		sseEmitterPool.sendDynamicalSummary(null);
 	}
 
 }

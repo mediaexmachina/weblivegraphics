@@ -29,10 +29,12 @@ import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -42,6 +44,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter.SseEventBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 
@@ -95,32 +98,63 @@ class SseEmitterPoolTest {
 		verify(sseEmitter, times(1)).send(sseEventBuilder);
 	}
 
-	@Test
-	void testSend_layers() throws IOException {
-		pool.create();
-		Mockito.reset(sseEmitter, sseEventBuilder);
+	@Nested
+	class Send {
 
-		when(sseEventBuilder.data(any(), any())).thenReturn(sseEventBuilder);
-		when(sseEventBuilder.id(any())).thenReturn(sseEventBuilder);
-		when(sseEventBuilder.reconnectTime(anyLong())).thenReturn(sseEventBuilder);
-		when(sseEventBuilder.name(any())).thenReturn(sseEventBuilder);
+		String json;
 
-		final var json = faker.address().fullAddress();
-		when(objectMapper.writeValueAsString(any())).thenReturn(json);
+		@BeforeEach
+		void init() throws JsonProcessingException {
+			pool.create();
+			Mockito.reset(sseEmitter, sseEventBuilder);
 
-		pool.send(layersDto);
+			when(sseEventBuilder.data(any(), any())).thenReturn(sseEventBuilder);
+			when(sseEventBuilder.id(any())).thenReturn(sseEventBuilder);
+			when(sseEventBuilder.reconnectTime(anyLong())).thenReturn(sseEventBuilder);
+			when(sseEventBuilder.name(any())).thenReturn(sseEventBuilder);
 
-		verify(sseEventBuilder, times(1)).data(json, APPLICATION_JSON);
-		verify(sseEventBuilder, times(1)).id("0");
-		verify(sseEventBuilder, times(1)).name("message");
-		verify(sseEventBuilder, atMostOnce()).reconnectTime(anyLong());
-		verify(sseEmitter, times(1)).send(sseEventBuilder);
+			json = faker.address().fullAddress();
+			when(objectMapper.writeValueAsString(any())).thenReturn(json);
+		}
 
-		verify(objectMapper, times(1)).writeValueAsString(payloadCaptor.capture());
-		final var payload = payloadCaptor.getValue();
-		assertNotNull(payload);
-		assertEquals(1, payload.size());
-		assertTrue(payload.containsKey("layers"));
-		assertEquals(layersDto, payload.get("layers"));
+		@AfterEach
+		void ends() throws IOException {
+			verify(sseEventBuilder, times(1)).data(json, APPLICATION_JSON);
+			verify(sseEventBuilder, times(1)).id("0");
+			verify(sseEventBuilder, times(1)).name("message");
+			verify(sseEventBuilder, atMostOnce()).reconnectTime(anyLong());
+			verify(sseEmitter, times(1)).send(sseEventBuilder);
+		}
+
+		private void checkPayload(final String expectedName,
+		                          final Object expectedValue) throws JsonProcessingException {
+			verify(objectMapper, times(1)).writeValueAsString(payloadCaptor.capture());
+			final var payload = payloadCaptor.getValue();
+			assertNotNull(payload);
+			assertEquals(1, payload.size());
+			assertTrue(payload.containsKey(expectedName));
+			assertEquals(expectedValue, payload.get(expectedName));
+		}
+
+		@Test
+		void testSend_layers() throws IOException {
+			pool.send(layersDto);
+			checkPayload("layers", layersDto);
+		}
+
+		@Test
+		void testSendDynamicalSummary() throws IOException {
+			final var chapters = List.of(faker.address().cityName());
+			pool.sendDynamicalSummary(chapters);
+			checkPayload("dynamicalSummary", chapters);
+		}
+
+		@Test
+		void testSendDynamicalSummaryChapter() throws IOException {
+			final var chapter = faker.address().cityName();
+			pool.sendDynamicalSummaryChapter(chapter);
+			checkPayload("dynamicalSummaryChapter", chapter);
+		}
+
 	}
 }

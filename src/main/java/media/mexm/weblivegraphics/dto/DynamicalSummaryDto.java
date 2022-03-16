@@ -14,22 +14,38 @@
  * Copyright (C) Media ex Machina 2022
  *
  */
-package media.mexm.weblivegraphics.service;
+package media.mexm.weblivegraphics.dto;
 
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import java.util.List;
 
-public interface SSEService {
+public class DynamicalSummaryDto {
 
-	void sendLayersToFront();
+	private String name;
+	private List<String> chapterList;
+	private int selected;
 
-	SseEmitter createFrontSSE();
+	public String getName() {
+		return name;
+	}
 
-	void displaySummary();
+	public void setName(final String name) {
+		this.name = name;
+	}
 
-	void hideSummary();
+	public List<String> getChapterList() {
+		return chapterList;
+	}
 
-	void displayCurrentChapterCard();
+	public void setChapterList(final List<String> chapterList) {
+		this.chapterList = chapterList;
+	}
 
-	void hideCurrentChapterCard();
+	public int getSelected() {
+		return selected;
+	}
+
+	public void setSelected(final int selected) {
+		this.selected = selected;
+	}
 
 }

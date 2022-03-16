@@ -66,8 +66,6 @@ class LayersAPITest {
 	MockMvc mvc;
 	@Autowired
 	GraphicService graphicService;
-	// @Autowired
-	// ObjectMapper objectMapper;
 
 	GraphicKeyerDto keyer;
 	String label;

@@ -30,6 +30,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 
+import media.mexm.weblivegraphics.service.DynamicalSummaryService;
 import media.mexm.weblivegraphics.service.GraphicService;
 import media.mexm.weblivegraphics.service.SSEService;
 
@@ -48,6 +49,18 @@ public class MockService {
 	}
 
 	@Configuration
+	@Profile({ "SSEServiceMock" })
+	static class SSEServiceMock {
+
+		@Bean
+		@Primary
+		public SSEService getSSEServiceMock() {
+			return Mockito.mock(SSEService.class);
+		}
+
+	}
+
+	@Configuration
 	@Profile({ "GraphicServiceMock" })
 	static class GraphicServiceMock {
 
@@ -55,6 +68,17 @@ public class MockService {
 		@Primary
 		public GraphicService getGraphicService() {
 			return Mockito.mock(GraphicService.class);
+		}
+	}
+
+	@Configuration
+	@Profile({ "DynamicalSummaryServiceMock" })
+	static class DynamicalSummaryServiceMock {
+
+		@Bean
+		@Primary
+		public DynamicalSummaryService getDynamicalSummaryService() {
+			return Mockito.mock(DynamicalSummaryService.class);
 		}
 	}
 
@@ -77,6 +101,18 @@ public class MockService {
 	}
 
 	@SpringBootTest
+	@ActiveProfiles({ "SSEServiceMock" })
+	static class TestSSEServiceMock {
+		@Autowired
+		SSEService sseService;
+
+		@Test
+		void test() {
+			assertTrue(MockUtil.isMock(sseService));
+		}
+	}
+
+	@SpringBootTest
 	@ActiveProfiles({ "GraphicServiceMock" })
 	static class TestGraphicServiceMock {
 		@Autowired
@@ -89,19 +125,37 @@ public class MockService {
 	}
 
 	@SpringBootTest
+	@ActiveProfiles({ "DynamicalSummaryServiceMock" })
+	static class TestDynamicalSummaryServiceMock {
+		@Autowired
+		DynamicalSummaryService dynamicalSummaryService;
+
+		@Test
+		void test() {
+			assertTrue(MockUtil.isMock(dynamicalSummaryService));
+		}
+	}
+
+	@SpringBootTest
 	static class TestNotMock {
 		@Autowired
 		SseEmitterPool sseEmitterPool;
 		@Autowired
+		SSEService sseService;
+		@Autowired
 		GraphicService graphicService;
 		@Autowired
 		SSEService sSEService;
+		@Autowired
+		DynamicalSummaryService dynamicalSummaryService;
 
 		@Test
 		void test() {
 			assertFalse(MockUtil.isMock(sseEmitterPool));
+			assertFalse(MockUtil.isMock(sseService));
 			assertFalse(MockUtil.isMock(graphicService));
 			assertFalse(MockUtil.isMock(sSEService));
+			assertFalse(MockUtil.isMock(dynamicalSummaryService));
 		}
 	}
 

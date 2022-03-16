@@ -189,7 +189,7 @@ public class LayersAPI {
 	@PutMapping(value = "/keyer/item/setup")
 	public ResponseEntity<Object> setItemSetup(@RequestParam(required = true) @NotEmpty final String keyerLabel,
 	                                           @RequestParam(required = true) @NotEmpty final String itemLabel,
-	                                           @RequestBody final Map<String, ?> setup) {
+	                                           @RequestBody final Map<String, ?> setup) {// TODO real DTO
 		final var item = getItemByNameAndByKeyerName(keyerLabel, itemLabel);
 		final var updated = graphicService.setItemSetup(item.getId(), setup);
 		return new ResponseEntity<>(updated, OK);

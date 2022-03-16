@@ -23,39 +23,50 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.MockUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.github.javafaker.Faker;
+
 import media.mexm.weblivegraphics.SseEmitterPool;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @SpringBootTest
-@ActiveProfiles({ "SSEMock" })
+@ActiveProfiles({ "SSEMock", "DynamicalSummaryServiceMock" })
 class SSEServiceTest {
+	private static final Faker faker = Faker.instance();
 
 	@Autowired
 	SSEService sseService;
 	@Autowired
 	SseEmitterPool sseEmitterPool;
 	@Autowired
+	DynamicalSummaryService dynamicalSummaryService;
+	@Autowired
 	OutputLayersDto layers;
 
 	@BeforeEach
 	void init() {
 		assertTrue(MockUtil.isMock(sseEmitterPool));
-		Mockito.reset(sseEmitterPool);
+		assertTrue(MockUtil.isMock(dynamicalSummaryService));
+		Mockito.reset(sseEmitterPool, dynamicalSummaryService);
 	}
 
 	@AfterEach
 	void ends() {
-		verifyNoMoreInteractions(sseEmitterPool);
+		verifyNoMoreInteractions(sseEmitterPool, dynamicalSummaryService);
 	}
 
 	@Test
@@ -75,4 +86,52 @@ class SSEServiceTest {
 		verify(sseEmitterPool, times(1)).create();
 	}
 
+	@Nested
+	class Summary {
+
+		String summary;
+		String chapter;
+		@Mock
+		List<String> chapters;
+
+		@BeforeEach
+		void init() throws Exception {
+			MockitoAnnotations.openMocks(this).close();
+
+			summary = faker.address().city();
+			when(dynamicalSummaryService.getActiveSummary()).thenReturn(summary);
+			chapter = faker.cat().name();
+			when(dynamicalSummaryService.getActiveChapter(summary)).thenReturn(chapter);
+			when(dynamicalSummaryService.getChapters(summary)).thenReturn(chapters);
+		}
+
+		@Test
+		void testDisplayCurrentChapterCard() {
+			sseService.displayCurrentChapterCard();
+
+			verify(dynamicalSummaryService, times(1)).getActiveSummary();
+			verify(dynamicalSummaryService, times(1)).getActiveChapter(summary);
+			verify(sseEmitterPool, times(1)).sendDynamicalSummaryChapter(chapter);
+		}
+
+		@Test
+		void testDisplaySummary() {
+			sseService.displaySummary();
+			verify(dynamicalSummaryService, times(1)).getActiveSummary();
+			verify(dynamicalSummaryService, times(1)).getChapters(summary);
+			verify(sseEmitterPool, times(1)).sendDynamicalSummary(chapters);
+		}
+
+		@Test
+		void testHideCurrentChapterCard() {
+			sseService.hideCurrentChapterCard();
+			verify(sseEmitterPool, times(1)).sendDynamicalSummaryChapter(null);
+		}
+
+		@Test
+		void testHideSummary() {
+			sseService.hideSummary();
+			verify(sseEmitterPool, times(1)).sendDynamicalSummary(null);
+		}
+	}
 }

@@ -20,7 +20,9 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
@@ -101,6 +103,20 @@ public class SseEmitterPool {
 	}
 
 	public void send(final OutputLayersDto layers) {
+		log.debug("Send Layers");
 		send("layers", layers);
 	}
+
+	public void sendDynamicalSummary(final List<String> currentSummary) {
+		final var payload = Optional.ofNullable(currentSummary).orElse(List.of());
+		log.debug("Send DynamicalSummary: \"{}\"", payload);
+		send("dynamicalSummary", payload);
+	}
+
+	public void sendDynamicalSummaryChapter(final String currentChapter) {
+		final var payload = Optional.ofNullable(currentChapter).orElse("");
+		log.debug("Send DynamicalSummaryChapter: \"{}\"", payload);
+		send("dynamicalSummaryChapter", payload);
+	}
+
 }

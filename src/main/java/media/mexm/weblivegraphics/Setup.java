@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import media.mexm.weblivegraphics.dto.DynamicalSummariesDto;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
 
 @Configuration
@@ -53,6 +54,11 @@ public class Setup {
 	@Bean
 	public OutputLayersDto getOutputLayers() {
 		return new OutputLayersDto();
+	}
+
+	@Bean
+	public DynamicalSummariesDto getDynamicalSummariesDto() {
+		return new DynamicalSummariesDto();
 	}
 
 	@Bean
