@@ -50,7 +50,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveFirstChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#158)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveFirstChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#146)
 
 ## <a name="goto4152393848"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/chapter/hide`
 
@@ -61,7 +61,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setHideActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#182)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setHideActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#164)
 
 ## <a name="goto4033681551"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/chapter/last?summary=<String>`
 
@@ -72,7 +72,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveLastChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#167)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveLastChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#152)
 
 ## <a name="goto4038289799"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/chapter/next?summary=<String>`
 
@@ -83,7 +83,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveNextChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#140)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveNextChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#134)
 
 ## <a name="goto3967551827"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/chapter/previous?summary=<String>`
 
@@ -94,7 +94,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setActivePrevChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#149)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setActivePrevChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#140)
 
 ## <a name="goto1628934738"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/chapter/show`
 
@@ -105,7 +105,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setShowActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#176)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setShowActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#158)
 
 ## <a name="goto1179943059"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/chapter?summary=<String>&chapter=<int>`
 
@@ -116,7 +116,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#130)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#127)
 
 ## <a name="goto1372768250"></a> **GET** `/v1/weblivegraphics/dynsummary/active/chapter?summary=<String>`
 
@@ -129,7 +129,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: getActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#124)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: getActiveChapter](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#121)
 
 ## <a name="goto2809224877"></a> **GET** `/v1/weblivegraphics/dynsummary/active/chapters`
 
@@ -142,7 +142,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: getActiveChapters](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#117)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: getActiveChapters](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#114)
 
 ## <a name="goto1646100089"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/hide`
 
@@ -153,7 +153,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setHideSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#194)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setHideSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#176)
 
 ## <a name="goto4102712403"></a> **PUT** `/v1/weblivegraphics/dynsummary/active/show`
 
@@ -164,7 +164,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setShowSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#188)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setShowSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#170)
 
 ## <a name="goto1813480663"></a> **PUT** `/v1/weblivegraphics/dynsummary/active?summary=<String>`
 
@@ -175,7 +175,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#104)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setActiveSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#102)
 
 ## <a name="goto4152038016"></a> **GET** `/v1/weblivegraphics/dynsummary/active`
 
@@ -187,7 +187,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: getActiveSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#111)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: getActiveSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#108)
 
 ## <a name="goto989120706"></a> **GET** `/v1/weblivegraphics/dynsummary/chapters?summary=<String>`
 
@@ -200,18 +200,24 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: getChapters](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#87)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: getChapters](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#89)
 
 ## <a name="goto2856483767"></a> **PUT** `/v1/weblivegraphics/dynsummary/chapters?summary=<String>`
 
 setChapters
 
 ```javascript
+Request body data: {
+    chapters: [String, ...]
+}
+```
+
+```javascript
 Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: setChapters](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#93)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: setChapters](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#95)
 
 ## <a name="goto2566279466"></a> **POST** `/v1/weblivegraphics/dynsummary?summary=<String>&active=<boolean>`
 
@@ -222,7 +228,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: createSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#70)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: createSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#73)
 
 ## <a name="goto2510365236"></a> **DELETE** `/v1/weblivegraphics/dynsummary?summary=<String>`
 
@@ -233,7 +239,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: deleteSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#81)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: deleteSummary](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#83)
 
 ## <a name="goto2367657518"></a> **GET** `/v1/weblivegraphics/dynsummary`
 
@@ -249,7 +255,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [DynamicalSummaryController :: getSummaries](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#56)
+[Go to the top](#top) &bull; [DynamicalSummaryController :: getSummaries](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/DynamicalSummaryController.java#59)
 
 ## <a name="goto3644120585"></a> **GET** `/v1/weblivegraphics/front/refresh-layers`
 
@@ -302,7 +308,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: getLayers](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#53)
+[Go to the top](#top) &bull; [LayersAPI :: getLayers](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#56)
 
 ## <a name="goto1777561426"></a> **PUT** `/v1/weblivegraphics/layers/bypass/off`
 
@@ -313,7 +319,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchBypassOff](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#64)
+[Go to the top](#top) &bull; [LayersAPI :: switchBypassOff](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#67)
 
 ## <a name="goto4095497441"></a> **PUT** `/v1/weblivegraphics/layers/bypass/on`
 
@@ -324,7 +330,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchBypassOn](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#58)
+[Go to the top](#top) &bull; [LayersAPI :: switchBypassOn](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#61)
 
 ## <a name="goto1100775687"></a> **PUT** `/v1/weblivegraphics/layers/dsk/label?label=<String>`
 
@@ -335,7 +341,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: setDSKKeyerLabel](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#90)
+[Go to the top](#top) &bull; [LayersAPI :: setDSKKeyerLabel](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#93)
 
 ## <a name="goto3949984969"></a> **PUT** `/v1/weblivegraphics/layers/dsk/pgm?active=<boolean>`
 
@@ -346,7 +352,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchDSKKeyerPgm](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#76)
+[Go to the top](#top) &bull; [LayersAPI :: switchDSKKeyerPgm](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#79)
 
 ## <a name="goto334093836"></a> **PUT** `/v1/weblivegraphics/layers/dsk/pvw?active=<boolean>`
 
@@ -357,7 +363,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchDSKKeyerPvw](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#83)
+[Go to the top](#top) &bull; [LayersAPI :: switchDSKKeyerPvw](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#86)
 
 ## <a name="goto3825314938"></a> **GET** `/v1/weblivegraphics/layers/dsk`
 
@@ -381,7 +387,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: getDSK](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#70)
+[Go to the top](#top) &bull; [LayersAPI :: getDSK](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#73)
 
 ## <a name="goto723987679"></a> **PUT** `/v1/weblivegraphics/layers/keyer/item/active?keyerLabel=<String>&itemLabel=<String>&active=<boolean>`
 
@@ -392,7 +398,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchItemActive](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#181)
+[Go to the top](#top) &bull; [LayersAPI :: switchItemActive](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#184)
 
 ## <a name="goto111475588"></a> **POST** `/v1/weblivegraphics/layers/keyer/item/move?keyerLabel=<String>&itemLabel=<String>&newKeyer=<String>`
 
@@ -434,18 +440,26 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: moveItemInKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#199)
+[Go to the top](#top) &bull; [LayersAPI :: moveItemInKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#202)
 
 ## <a name="goto3019336356"></a> **PUT** `/v1/weblivegraphics/layers/keyer/item/setup?keyerLabel=<String>&itemLabel=<String>`
 
 setItemSetup
 
 ```javascript
+Request body data: {
+    setup: {
+
+    }
+}
+```
+
+```javascript
 Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: setItemSetup](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#190)
+[Go to the top](#top) &bull; [LayersAPI :: setItemSetup](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#193)
 
 ## <a name="goto2439544347"></a> **POST** `/v1/weblivegraphics/layers/keyer/item?keyerLabel=<String>&itemLabel=<String>&typeName=<String>&active=<boolean>`
 
@@ -463,7 +477,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: createItem](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#163)
+[Go to the top](#top) &bull; [LayersAPI :: createItem](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#166)
 
 ## <a name="goto1772645336"></a> **DELETE** `/v1/weblivegraphics/layers/keyer/item?keyerLabel=<String>&itemLabel=<String>`
 
@@ -474,7 +488,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: deleteItem](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#173)
+[Go to the top](#top) &bull; [LayersAPI :: deleteItem](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#176)
 
 ## <a name="goto4004480069"></a> **GET** `/v1/weblivegraphics/layers/keyer/item?keyerLabel=<String>&itemLabel=<String>`
 
@@ -492,7 +506,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: getItem](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#156)
+[Go to the top](#top) &bull; [LayersAPI :: getItem](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#159)
 
 ## <a name="goto996658272"></a> **POST** `/v1/weblivegraphics/layers/keyer/move?label=<String>&newPos=<int>`
 
@@ -534,7 +548,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: moveKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#209)
+[Go to the top](#top) &bull; [LayersAPI :: moveKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#212)
 
 ## <a name="goto3661132383"></a> **PUT** `/v1/weblivegraphics/layers/keyer/pgm?label=<String>&active=<boolean>`
 
@@ -545,7 +559,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchKeyerPgm](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#125)
+[Go to the top](#top) &bull; [LayersAPI :: switchKeyerPgm](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#128)
 
 ## <a name="goto63412551"></a> **PUT** `/v1/weblivegraphics/layers/keyer/pvw?label=<String>&active=<boolean>`
 
@@ -556,7 +570,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: switchKeyerPvw](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#133)
+[Go to the top](#top) &bull; [LayersAPI :: switchKeyerPvw](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#136)
 
 ## <a name="goto3057591294"></a> **DELETE** `/v1/weblivegraphics/layers/keyer?label=<String>`
 
@@ -567,7 +581,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: deleteKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#118)
+[Go to the top](#top) &bull; [LayersAPI :: deleteKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#121)
 
 ## <a name="goto4210837688"></a> **GET** `/v1/weblivegraphics/layers/keyer?label=<String>`
 
@@ -591,7 +605,7 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: getKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#102)
+[Go to the top](#top) &bull; [LayersAPI :: getKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#105)
 
 ## <a name="goto2020511672"></a> **POST** `/v1/weblivegraphics/layers/keyer?label=<String>`
 
@@ -615,5 +629,5 @@ Response: "application/json" {
 }
 ```
 
-[Go to the top](#top) &bull; [LayersAPI :: createKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#112)
+[Go to the top](#top) &bull; [LayersAPI :: createKeyer](https://github.com/mediaexmachina/weblivegraphics/blob/master/src/main/java/media/mexm/weblivegraphics/controller/LayersAPI.java#115)
 
