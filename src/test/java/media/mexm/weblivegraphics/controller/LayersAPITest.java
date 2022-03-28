@@ -52,6 +52,7 @@ import com.github.javafaker.Faker;
 import media.mexm.weblivegraphics.dto.GraphicItemDto;
 import media.mexm.weblivegraphics.dto.GraphicKeyerDto;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
+import media.mexm.weblivegraphics.dto.validated.LayerItemSetupDto;
 import media.mexm.weblivegraphics.service.GraphicService;
 
 @SpringBootTest
@@ -61,6 +62,8 @@ class LayersAPITest {
 
 	private static final Faker faker = Faker.instance();
 	private final ResultMatcher statusOk = status().isOk();
+	private final ResultMatcher statusCreated = status().isCreated();
+	private final ResultMatcher statusNoContent = status().isNoContent();
 
 	@Autowired
 	MockMvc mvc;
@@ -106,7 +109,7 @@ class LayersAPITest {
 	void testSwitchBypassOn() throws Exception {
 		mvc.perform(put("/v1/weblivegraphics/layers/bypass/on")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setFullBypass(true);
 	}
 
@@ -114,7 +117,7 @@ class LayersAPITest {
 	void testSwitchBypassOff() throws Exception {
 		mvc.perform(put("/v1/weblivegraphics/layers/bypass/off")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setFullBypass(false);
 	}
 
@@ -142,12 +145,12 @@ class LayersAPITest {
 
 		mvc.perform(put("/v1/weblivegraphics/layers/dsk/pgm?active=true")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setActiveProgramKeyer(dsk.getId(), true);
 
 		mvc.perform(put("/v1/weblivegraphics/layers/dsk/pgm?active=false")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setActiveProgramKeyer(dsk.getId(), false);
 		verify(graphicService, times(2)).getDSK();
 	}
@@ -160,12 +163,12 @@ class LayersAPITest {
 
 		mvc.perform(put("/v1/weblivegraphics/layers/dsk/pvw?active=true")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setActivePreviewKeyer(dsk.getId(), true);
 
 		mvc.perform(put("/v1/weblivegraphics/layers/dsk/pvw?active=false")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setActivePreviewKeyer(dsk.getId(), false);
 		verify(graphicService, times(2)).getDSK();
 	}
@@ -179,7 +182,7 @@ class LayersAPITest {
 		final var newLabel = faker.address().zipCode();
 		mvc.perform(put("/v1/weblivegraphics/layers/dsk/label?label=" + newLabel)
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).setLabel(dsk.getId(), newLabel);
 		verify(graphicService, times(1)).getDSK();
 	}
@@ -199,7 +202,7 @@ class LayersAPITest {
 		when(graphicService.addKeyer(label)).thenReturn(keyer);
 		mvc.perform(post("/v1/weblivegraphics/layers/keyer?label=" + label)
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk)
+		        .andExpect(statusCreated)
 		        .andExpect(jsonPath("$.id").isString())
 		        .andExpect(jsonPath("$.label").value(label));
 		verify(graphicService, times(1)).addKeyer(label);
@@ -209,7 +212,7 @@ class LayersAPITest {
 	void testDeleteKeyer() throws Exception {
 		mvc.perform(delete("/v1/weblivegraphics/layers/keyer?label=" + label)
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).getKeyerByLabel(label);
 		verify(graphicService, times(1)).delete(id);
 	}
@@ -218,7 +221,7 @@ class LayersAPITest {
 	void testSwitchKeyerPgm() throws Exception {
 		mvc.perform(put("/v1/weblivegraphics/layers/keyer/pgm?label=" + label + "&active=true")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).getKeyerByLabel(label);
 		verify(graphicService, times(1)).setActiveProgramKeyer(id, true);
 	}
@@ -227,7 +230,7 @@ class LayersAPITest {
 	void testSwitchKeyerPvw() throws Exception {
 		mvc.perform(put("/v1/weblivegraphics/layers/keyer/pvw?label=" + label + "&active=true")
 		        .accept(APPLICATION_JSON))
-		        .andExpect(statusOk);
+		        .andExpect(statusNoContent);
 		verify(graphicService, times(1)).getKeyerByLabel(label);
 		verify(graphicService, times(1)).setActivePreviewKeyer(id, true);
 	}
@@ -291,7 +294,7 @@ class LayersAPITest {
 		void testDeleteItem() throws Exception {
 			mvc.perform(delete("/v1/weblivegraphics/layers/keyer/item?keyerLabel=" + label + "&itemLabel=" + itemLabel)
 			        .accept(APPLICATION_JSON))
-			        .andExpect(statusOk);
+			        .andExpect(statusNoContent);
 
 			verify(graphicService, times(1)).delete(item.getId());
 			verify(graphicService, times(1)).getKeyerByLabel(label);
@@ -313,14 +316,16 @@ class LayersAPITest {
 
 		@Test
 		void testSetItemSetup() throws Exception {
-			final var setup = Map.of("key", faker.cat().name());
-			item.setSetup(setup);
-			when(graphicService.setItemSetup(item.getId(), setup)).thenReturn(item);
+			final var setupDto = new LayerItemSetupDto();
+			final var payload = Map.of("key", faker.cat().name());
+			setupDto.setSetup(payload);
+			item.setSetup(payload);
+			when(graphicService.setItemSetup(item.getId(), payload)).thenReturn(item);
 
 			final var mapper = new ObjectMapper();
 			mapper.configure(WRAP_ROOT_VALUE, false);
 			final var ow = mapper.writer().withDefaultPrettyPrinter();
-			final var requestJson = ow.writeValueAsString(setup);
+			final var requestJson = ow.writeValueAsString(setupDto);
 
 			mvc.perform(put("/v1/weblivegraphics/layers/keyer/item/setup?keyerLabel="
 			                + label + "&itemLabel=" + itemLabel)
@@ -331,7 +336,7 @@ class LayersAPITest {
 			        .andExpect(jsonPath("$.id").isString())
 			        .andExpect(jsonPath("$.label").value(itemLabel));
 
-			verify(graphicService, times(1)).setItemSetup(item.getId(), setup);
+			verify(graphicService, times(1)).setItemSetup(item.getId(), payload);
 			verify(graphicService, times(1)).getKeyerByLabel(label);
 		}
 

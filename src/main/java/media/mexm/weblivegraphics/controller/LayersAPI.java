@@ -16,10 +16,11 @@
  */
 package media.mexm.weblivegraphics.controller;
 
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -27,6 +28,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +42,7 @@ import media.mexm.weblivegraphics.RestExceptionHandler.CantFoundItemException;
 import media.mexm.weblivegraphics.dto.GraphicItemDto;
 import media.mexm.weblivegraphics.dto.GraphicKeyerDto;
 import media.mexm.weblivegraphics.dto.OutputLayersDto;
+import media.mexm.weblivegraphics.dto.validated.LayerItemSetupDto;
 import media.mexm.weblivegraphics.service.GraphicService;
 
 @RestController
@@ -57,13 +60,13 @@ public class LayersAPI {
 	@PutMapping(value = "/bypass/on")
 	public ResponseEntity<Object> switchBypassOn() {
 		graphicService.setFullBypass(true);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@PutMapping(value = "/bypass/off")
 	public ResponseEntity<Object> switchBypassOff() {
 		graphicService.setFullBypass(false);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@GetMapping(value = "/dsk")
@@ -76,21 +79,21 @@ public class LayersAPI {
 	public ResponseEntity<Object> switchDSKKeyerPgm(@RequestParam final boolean active) {
 		final var uuid = graphicService.getDSK().getId();
 		graphicService.setActiveProgramKeyer(uuid, active);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@PutMapping(value = "/dsk/pvw")
 	public ResponseEntity<Object> switchDSKKeyerPvw(@RequestParam final boolean active) {
 		final var uuid = graphicService.getDSK().getId();
 		graphicService.setActivePreviewKeyer(uuid, active);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@PutMapping(value = "/dsk/label")
 	public ResponseEntity<Object> setDSKKeyerLabel(@RequestParam(required = true) @NotEmpty final String label) {
 		final var uuid = graphicService.getDSK().getId();
 		graphicService.setLabel(uuid, label);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	private GraphicKeyerDto getKeyerByName(@RequestParam(required = true) @NotEmpty final String label) {
@@ -111,14 +114,14 @@ public class LayersAPI {
 	@PostMapping(value = "/keyer")
 	public ResponseEntity<GraphicKeyerDto> createKeyer(@RequestParam(required = true) @NotEmpty final String label) {
 		final var keyer = graphicService.addKeyer(clean(label));
-		return new ResponseEntity<>(keyer, OK);
+		return new ResponseEntity<>(keyer, CREATED);
 	}
 
 	@DeleteMapping(value = "/keyer")
 	public ResponseEntity<Object> deleteKeyer(@RequestParam(required = true) @NotEmpty final String label) {
 		final var keyer = getKeyerByName(label);
 		graphicService.delete(keyer.getId());
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@PutMapping(value = "/keyer/pgm")
@@ -126,7 +129,7 @@ public class LayersAPI {
 	                                             @RequestParam(required = true) @NotEmpty final boolean active) {
 		final var keyer = getKeyerByName(label);
 		graphicService.setActiveProgramKeyer(keyer.getId(), active);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@PutMapping(value = "/keyer/pvw")
@@ -134,7 +137,7 @@ public class LayersAPI {
 	                                             @RequestParam(required = true) final boolean active) {
 		final var keyer = getKeyerByName(label);
 		graphicService.setActivePreviewKeyer(keyer.getId(), active);
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	private GraphicItemDto getItemByNameAndByKeyerName(@RequestParam(required = true) @NotEmpty final String keyerLabel,
@@ -174,7 +177,7 @@ public class LayersAPI {
 	                                         @RequestParam(required = true) @NotEmpty final String itemLabel) {
 		final var item = getItemByNameAndByKeyerName(keyerLabel, itemLabel);
 		graphicService.delete(item.getId());
-		return new ResponseEntity<>(OK);
+		return new ResponseEntity<>(NO_CONTENT);
 	}
 
 	@PutMapping(value = "/keyer/item/active")
@@ -189,9 +192,9 @@ public class LayersAPI {
 	@PutMapping(value = "/keyer/item/setup")
 	public ResponseEntity<Object> setItemSetup(@RequestParam(required = true) @NotEmpty final String keyerLabel,
 	                                           @RequestParam(required = true) @NotEmpty final String itemLabel,
-	                                           @RequestBody final Map<String, ?> setup) {// TODO real DTO
+	                                           @RequestBody @Validated final LayerItemSetupDto setup) {
 		final var item = getItemByNameAndByKeyerName(keyerLabel, itemLabel);
-		final var updated = graphicService.setItemSetup(item.getId(), setup);
+		final var updated = graphicService.setItemSetup(item.getId(), setup.getSetup());
 		return new ResponseEntity<>(updated, OK);
 	}
 
