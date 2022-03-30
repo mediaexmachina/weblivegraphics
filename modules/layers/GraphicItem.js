@@ -18,6 +18,7 @@
 
 import React, { Component } from "react";
 import { Clock } from "./Clock";
+import { Dynsummary } from "./Dynsummary";
 
 export class GraphicItem extends Component {
     constructor(props) {
@@ -37,6 +38,13 @@ export class GraphicItem extends Component {
             );
         } else if (item.typeName == "clock") {
             return <Clock key={item.id} />;
+        } else if (item.typeName == "dynsummary") {
+            return (
+                <Dynsummary
+                    key={item.id}
+                    globalAccess={this.props.globalAccess}
+                />
+            );
         }
         return <div>{item.typeName}</div>;
     }

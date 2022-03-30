@@ -20,6 +20,7 @@ import static org.springframework.http.MediaType.IMAGE_PNG;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,15 +77,24 @@ public class OnAirPage {
 		model.addAttribute("pagekind", pagekind);
 	}
 
-	@GetMapping("/background.png")
-	public ResponseEntity<InputStreamResource> getBackgroundImage() throws IOException {
-		final var file = new File(appConf.getBaseBackgroundFile());
+	private ResponseEntity<InputStreamResource> getResponseEntityByFilename(final String fileName) throws FileNotFoundException {
+		final var file = new File(fileName);
 		final var resource = new InputStreamResource(new FileInputStream(file));
 		return ResponseEntity
 		        .ok()
 		        .contentType(IMAGE_PNG)
 		        .contentLength(file.length())
 		        .body(resource);
+	}
+
+	@GetMapping("/background.png")
+	public ResponseEntity<InputStreamResource> getBackgroundImage() throws IOException {
+		return getResponseEntityByFilename(appConf.getBaseBackgroundFile());
+	}
+
+	@GetMapping("/liveDynSummaryChaptersBox.png")
+	public ResponseEntity<InputStreamResource> getLiveDynSummaryChaptersBox() throws IOException {
+		return getResponseEntityByFilename(appConf.getLiveDynSummaryChaptersBoxFile());
 	}
 
 	@GetMapping(value = "/sse")

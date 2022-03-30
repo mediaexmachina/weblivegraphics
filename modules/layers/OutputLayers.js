@@ -47,7 +47,12 @@ export class OutputLayers extends Component {
             for (let i = 0; i < filteredKeyers.length; i++) {
                 const k = filteredKeyers[i];
                 allKeyers.push(
-                    <GraphicKeyer key={k.id} keyer={k} zindex={100 + i} />
+                    <GraphicKeyer
+                        key={k.id}
+                        keyer={k}
+                        zindex={100 + i}
+                        globalAccess={this.props.globalAccess}
+                    />
                 );
             }
         }
@@ -58,6 +63,7 @@ export class OutputLayers extends Component {
                     key={downStreamKeyer.id}
                     keyer={downStreamKeyer}
                     zindex="10000"
+                    globalAccess={this.props.globalAccess}
                 />
             );
         }

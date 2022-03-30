@@ -23,8 +23,14 @@ curl -X POST "$BASE_URL_API/dynsummary?summary=ExampleSum&active=true"
 # Put chapters for this Summary
 curl -d '{"chapters":["Chapter 1", "Chapter 2"]}' -X PUT -H "Content-Type: application/json" "$BASE_URL_API/dynsummary/chapters?summary=ExampleSum"
 
+# Set first chapter active for this Summary
+curl -X PUT "$BASE_URL_API/dynsummary/active/chapter/first?summary=ExampleSum"
+
 # Put Dynamic Summary on "toptitle" keyer
 curl -X POST "$BASE_URL_API/layers/keyer/item?keyerLabel=toptitle&itemLabel=DynSum&typeName=dynsummary&active=true"
 
+# curl -X PUT http://localhost:8080/v1/weblivegraphics/dynsummary/active/chapter/hide
+# curl -X PUT http://localhost:8080/v1/weblivegraphics/dynsummary/active/chapter/show
 # curl -X PUT http://localhost:8080/v1/weblivegraphics/dynsummary/active/hide
 # curl -X PUT http://localhost:8080/v1/weblivegraphics/dynsummary/active/show
+

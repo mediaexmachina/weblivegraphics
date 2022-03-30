@@ -50,8 +50,15 @@ export class SSEClient extends Component {
 
     onMessage(event) {
         const eventData = JSON.parse(event.data);
-        if (eventData.hasOwnProperty("layers")) {
-            this.props.onLayersUpdate(eventData.layers);
+        for (const key in eventData) {
+            if (key == "layers") {
+                this.props.onLayersUpdate(eventData.layers);
+            } else {
+                const callback = this.props.topicCallbackers[key];
+                if (callback != null) {
+                    callback(eventData[key]);
+                }
+            }
         }
     }
 

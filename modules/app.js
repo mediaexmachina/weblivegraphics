@@ -27,23 +27,52 @@ import { BasePage } from "./BasePage";
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { topicCallbackers: {} };
     }
 
     onLayersUpdate(layers) {
         this.setState({ lastLayers: layers });
     }
 
+    onRegisterCallback(topic, onMessage) {
+        this.setState((state) => {
+            let newTopicCallbackers = Object.assign({}, state.topicCallbackers);
+            newTopicCallbackers[topic] = onMessage;
+            return { topicCallbackers: newTopicCallbackers };
+        });
+    }
+
+    onUnRegisterCallback(topic) {
+        this.setState((state) => {
+            let newTopicCallbackers = Object.assign({}, state.topicCallbackers);
+            newTopicCallbackers.delete(topic);
+            return { topicCallbackers: newTopicCallbackers };
+        });
+    }
+
     render() {
         const lastLayers = this.state.lastLayers;
+        const globalAccess = {
+            registerCallback: this.onRegisterCallback.bind(this),
+            unRegisterCallback: this.onUnRegisterCallback.bind(this),
+        };
+
         if (typeof lastLayers == "undefined") {
             return (
-                <SSEClient onLayersUpdate={this.onLayersUpdate.bind(this)} />
+                <SSEClient
+                    onLayersUpdate={this.onLayersUpdate.bind(this)}
+                    topicCallbackers={this.state.topicCallbackers}
+                />
             );
         }
         let mainPage = null;
         if (pagekind != null) {
-            mainPage = <OutputLayers lastLayers={lastLayers} />;
+            mainPage = (
+                <OutputLayers
+                    lastLayers={lastLayers}
+                    globalAccess={globalAccess}
+                />
+            );
         } else {
             mainPage = <BasePage />;
         }
@@ -54,6 +83,7 @@ class App extends Component {
                     {mainPage}
                     <SSEClient
                         onLayersUpdate={this.onLayersUpdate.bind(this)}
+                        topicCallbackers={this.state.topicCallbackers}
                     />
                 </React.StrictMode>
             </>

@@ -27,7 +27,11 @@ export class GraphicKeyer extends Component {
     render() {
         var keyer = this.props.keyer;
         const allItems = keyer.items.map((i) => (
-            <GraphicItem key={i.id} item={i} />
+            <GraphicItem
+                key={i.id}
+                item={i}
+                globalAccess={this.props.globalAccess}
+            />
         ));
 
         return (

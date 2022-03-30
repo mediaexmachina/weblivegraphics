@@ -25,6 +25,7 @@ public class AppConf {
 
 	private String vendorProps;
 	private String baseBackgroundFile;
+	private String liveDynSummaryChaptersBoxFile;
 
 	public String getVendorProps() {
 		return vendorProps;
@@ -40,6 +41,14 @@ public class AppConf {
 
 	public void setBaseBackgroundFile(final String baseBackgroundFile) {
 		this.baseBackgroundFile = baseBackgroundFile;
+	}
+
+	public String getLiveDynSummaryChaptersBoxFile() {
+		return liveDynSummaryChaptersBoxFile;
+	}
+
+	public void setLiveDynSummaryChaptersBoxFile(final String liveDynSummaryChaptersBoxFile) {
+		this.liveDynSummaryChaptersBoxFile = liveDynSummaryChaptersBoxFile;
 	}
 
 }
