@@ -50,6 +50,7 @@ You should setup `address` and `port` to listen connections from web server.
 weblivegraphics:
     vendorProps: /path/to/vendor.properties
     baseBackgroundFile: /path/to/background.png
+    liveDynSummaryChaptersBoxFile: /path/to/liveDynSummaryChaptersBox.png
 ```
 
 Specific weblivegraphics configuration keys, mandatory.
@@ -57,6 +58,8 @@ Specific weblivegraphics configuration keys, mandatory.
 `weblivegraphics.vendorProps` for the vendor.properties file to point and create if needed.
 
 `weblivegraphics.baseBackgroundFile` for put default background file (png, transparent, 16/9 file).
+
+`weblivegraphics.liveDynSummaryChaptersBoxFile` for put Dynamic Live Summary / chapter card background file (png, transparent, 1/1 file).
 
 ```yml
 js:
@@ -216,6 +219,16 @@ Use it for display texts or information should not be recorded, like a clock.
 Each layer can be visible independently on Program and/or Preview channel.
 
 A RESTfull API can operate on layers (see [API.md](API.md)).
+
+### Dynamical Summaries
+
+Display, on a keyer, a Live Summaries. It's drive by REST interface.
+
+See `config-dev/demo.bash` for REST example.
+
+We can have multiple Summaries loaded, but only one can be marked "active". A Summary contain chapters (a simple String list), only one Chapter can be marked "active".
+
+Two REST commands sent to client the order of show/hide current active Summary, and two others to display/hide current active Chapter. Only show/hide commands can have a real outcome in PGM/CLN/PVW screens, event if active Chapter/Summary is edited or deleted.
 
 ## Contribution
 
