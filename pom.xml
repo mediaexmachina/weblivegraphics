@@ -4,7 +4,7 @@
     <groupId>com.mediaexmachina</groupId>
     <artifactId>weblivegraphics</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
 
     <name>WebLiveGraphics</name>
     <url>https://github.com/mediaexmachina/weblivegraphics</url>
